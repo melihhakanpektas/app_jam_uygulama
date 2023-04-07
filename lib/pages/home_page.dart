@@ -78,13 +78,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.favorite),
+              icon: const Icon(Icons.book),
               onPressed: () {
                 onItemTapped(3);
               },
             ),
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.games),
               onPressed: () {
                 onItemTapped(4);
               },
