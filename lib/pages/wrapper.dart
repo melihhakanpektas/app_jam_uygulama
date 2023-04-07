@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app_jam_uygulama/pages/home_page.dart';
+import 'package:app_jam_uygulama/pages/frame.dart';
 import 'package:app_jam_uygulama/pages/login_page.dart';
 import 'package:app_jam_uygulama/providers/preferences_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -85,7 +85,7 @@ class _WrapperState extends State<Wrapper> {
                                         ),
                                       ],
                                     )))
-                                : const HomePage(
+                                : const Frame(
                                     key: ValueKey<int>(12352466),
                                   )));
               });
