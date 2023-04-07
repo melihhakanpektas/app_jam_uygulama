@@ -85,8 +85,8 @@ class _WrapperState extends State<Wrapper> {
                                         ),
                                       ],
                                     )))
-                                : HomePage(
-                                    key: UniqueKey(),
+                                : const HomePage(
+                                    key: ValueKey<int>(12352466),
                                   )));
               });
         } else if (connectionSnapshot.hasError) {
