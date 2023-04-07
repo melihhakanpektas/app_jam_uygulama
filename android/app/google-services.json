@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "147371491698",
+    "project_id": "oua-app-jam",
+    "storage_bucket": "oua-app-jam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147371491698:android:15e8f6e298682cddbc5deb",
+        "android_client_info": {
+          "package_name": "com.example.app_jam_uygulama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147371491698-hhdlfjodddioq7s3acu5l9igqrnf7rpu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCALKW16n01wstv_uIm6c4eMj0xuWQRFX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147371491698-hhdlfjodddioq7s3acu5l9igqrnf7rpu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "147371491698-u1s6u8gn8tj84t7lvlnm2seidpsbea48.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appJamUygulama"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
