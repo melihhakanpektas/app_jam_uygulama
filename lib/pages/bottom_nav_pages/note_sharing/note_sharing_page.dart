@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app_jam_uygulama/components/common_alert_dialogs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NoteSharingPage extends StatefulWidget {
   const NoteSharingPage({super.key});
@@ -40,52 +41,68 @@ class _NoteSharingPageState extends State<NoteSharingPage> {
                   : ListView.builder(
                       padding: const EdgeInsets.all(6),
                       itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) => Card(
-                        elevation: 5,
-                        color: colorList[Random().nextInt(3)],
-                        child: ListTile(
-                          title: Text(
-                            snapshot.data!.docs[index].data()['title'],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                      itemBuilder: (context, index) {
+                        final docs = snapshot.data!.docs;
+                        docs.sort((a, b) => (b.data()['date'] as Timestamp)
+                            .compareTo((a.data()['date'] as Timestamp)));
+                        return Card(
+                          elevation: 5,
+                          color: colorList[Random().nextInt(3)],
+                          child: ListTile(
+                            title: Text(
+                              docs[index].data()['title'],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  docs[index].data()['subtitle'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(color: Colors.white),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 4,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('dd/MM/yyyy HH:mm').format(
+                                          (docs[index].data()['date']
+                                                  as Timestamp)
+                                              .toDate()),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                    Text(
+                                      docs[index].data()['name'],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall!
+                                          .copyWith(color: Colors.white),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                snapshot.data!.docs[index].data()['subtitle'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(color: Colors.white),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 4,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    snapshot.data!.docs[index].data()['name'],
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelSmall!
-                                        .copyWith(color: Colors.white),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     )),
     );
   }
