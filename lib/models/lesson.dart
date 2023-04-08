@@ -298,21 +298,13 @@ class HeaderTopics {
                             " Bu dersimiz de tamamen referans ve referansın ne kadar önemli olduğunu işleyeceğiz. ",
                         url: 'https://youtu.be/Yxqa3W2dRv8',
                         duration: '9dk'),
-
-                        Lesson(
+                    Lesson(
                         title: 'Eskiz Yapımı',
                         subtitle:
                             " Bu dersimizde eskiz yapımı ve tasarım öncesi eskizlerin öneminden bahsedeceğiz. ",
                         url: 'https://youtu.be/TukE7Jd_7SU',
                         duration: '4dk'),
                   ]),
-
-
-
-
-
-
-
               LessonTopics(
                   title: '2D Sanat ve Daha Fazlası',
                   subtitle:
@@ -326,26 +318,22 @@ class HeaderTopics {
                         duration: '1dk'),
                     Lesson(
                         title: '2D Sanat Nedir?',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: '',
                         duration: '4dk'),
                     Lesson(
                         title: 'Gerçekçi Sanat',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: '',
                         duration: '5dk'),
                     Lesson(
                         title: 'Yarı Gerçekçi Sanat',
-                        subtitle:
-                            '',
+                        subtitle: '',
                         url: '',
                         duration: '4dk'),
                     Lesson(
                         title: 'Stilize Edilmiş Sanat ',
-                        subtitle:
-                            '',
+                        subtitle: '',
                         url: '',
                         duration: '4dk'),
                     Lesson(
@@ -355,8 +343,7 @@ class HeaderTopics {
                         duration: '9dk'),
                     Lesson(
                         title: 'Çizim Programları',
-                        subtitle:
-                            '',
+                        subtitle: '',
                         url: '',
                         duration: '5dk'),
                   ])
