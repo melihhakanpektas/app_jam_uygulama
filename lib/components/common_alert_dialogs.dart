@@ -44,8 +44,9 @@ class CommonAlertDialogs {
                 ),
                 validator: (a) {
                   final value = a;
-                  if (value == null || value.trim().isEmpty)
+                  if (value == null || value.trim().isEmpty) {
                     return 'Boş bırakılamaz';
+                  }
                   if (value.trim().length < 50) return 'Çok Kısa';
                   return null;
                 },
