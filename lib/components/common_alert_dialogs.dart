@@ -26,11 +26,13 @@ class CommonAlertDialogs {
                     hintText: 'Başlık',
                     hintStyle: TextStyle(color: Colors.grey[500]),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
+                  validator: (a) {
+                    final value = a;
+                    if (value == null || value.trim().isEmpty) {
                       return 'Boş bırakılamaz';
                     }
-                    if (value.length < 7) return 'Çok Kısa';
+                    if (value.trim().length < 7) return 'Çok Kısa';
+                    return null;
                   }),
               TextFormField(
                 controller: subtitleController,
@@ -40,24 +42,32 @@ class CommonAlertDialogs {
                   hintText: 'Açıklama',
                   hintStyle: TextStyle(color: Colors.grey[500]),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Boş bırakılamaz';
-                  if (value.length < 50) return 'Çok Kısa';
+                validator: (a) {
+                  final value = a;
+                  if (value == null || value.trim().isEmpty)
+                    return 'Boş bırakılamaz';
+                  if (value.trim().length < 50) return 'Çok Kısa';
+                  return null;
                 },
                 maxLines: null,
               ),
               ElevatedButton(
                   onPressed: () {
-                    CommonAlertDialogs.loadingScreen(context);
-                    FirebaseFirestore.instance.collection('notes').doc().set({
-                      'title': titleController.text,
-                      'subtitle': subtitleController.text,
-                      'uid': FirebaseAuth.instance.currentUser!.uid,
-                      'name': context.read<AppInfoBloc>().state.userName,
-                      'date': Timestamp.now()
-                    }).then((value) => Navigator.of(context)
-                      ..pop()
-                      ..pop());
+                    final title = titleController.text.trim();
+                    final subtitle = subtitleController.text.trim();
+                    final isValid = formKey.currentState!.validate();
+                    if (isValid) {
+                      CommonAlertDialogs.loadingScreen(context);
+                      FirebaseFirestore.instance.collection('notes').doc().set({
+                        'title': title,
+                        'subtitle': subtitle,
+                        'uid': FirebaseAuth.instance.currentUser!.uid,
+                        'name': context.read<AppInfoBloc>().state.userName,
+                        'date': Timestamp.now()
+                      }).then((value) => Navigator.of(context)
+                        ..pop()
+                        ..pop());
+                    }
                   },
                   child: const Text('Paylaş'))
             ]),

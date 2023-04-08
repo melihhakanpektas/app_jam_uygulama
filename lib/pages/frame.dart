@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:app_jam_uygulama/components/home_page_drawer.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/game_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/home_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/info_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
@@ -29,7 +32,7 @@ class _FrameState extends State<Frame> {
     const LessonsPage(
       key: ValueKey<int>(2357457913),
     ),
-    const HomePage(
+    const GamePage(
       key: ValueKey<int>(5793686),
     ),
   ];
@@ -42,84 +45,86 @@ class _FrameState extends State<Frame> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const HomePageDrawer(),
-      appBar: AppBar(title: const Text('Oyun ve Uygulama Akademisi')),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).appBarTheme.backgroundColor,
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.info),
-              onPressed: () {
-                onItemTapped(0);
-              },
-            ),
-            IconButton(
-              icon: Stack(
-                children: const [
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Icon(
-                      Icons.share,
-                      size: 15,
-                    ),
-                  ),
-                  Icon(MdiIcons.table)
-                ],
-              ),
-              onPressed: () {
-                onItemTapped(1);
-              },
-            ),
-            SizedBox(
-              width: 60.0,
-              height: 60.0,
-              child: Stack(
-                children: [
-                  const Center(
-                    child: Image(
-                      width: 40,
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/images/oua_logo.png'),
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(30),
-                        onTap: () {
-                          onItemTapped(2);
-                        },
-                      ),
-                    ),
-                  )
-                ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (currentIndex == 2) {
+          return true;
+        } else {
+          onItemTapped(2);
+          return false;
+        }
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        drawer: const HomePageDrawer(),
+        appBar: AppBar(
+          bottomOpacity: 0,
+          backgroundColor: Colors.transparent,
+          title: const Text('Oyun ve Uygulama Akademisi'),
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                ),
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.book),
-              onPressed: () {
-                onItemTapped(3);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.games),
-              onPressed: () {
-                onItemTapped(4);
-              },
-            ),
-          ],
+          ),
         ),
-      ),
-      body: AnimatedSwitcher(
-        key: ValueKey<int>(5477862),
-        duration: const Duration(milliseconds: 500),
-        child: pages[currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            items: [
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.info), label: 'Hakkında'),
+              BottomNavigationBarItem(
+                  icon: Stack(
+                    children: const [
+                      Positioned(
+                        right: 0,
+                        bottom: 0,
+                        child: Icon(
+                          Icons.share,
+                          size: 15,
+                        ),
+                      ),
+                      Icon(MdiIcons.table)
+                    ],
+                  ),
+                  label: 'Not Paylaş'),
+              BottomNavigationBarItem(
+                  icon: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: Stack(
+                      children: const [
+                        Center(
+                          child: Image(
+                            width: 40,
+                            fit: BoxFit.contain,
+                            image: AssetImage('assets/images/oua_logo.png'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  label: 'Ana Sayfa'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.book), label: 'Dersler'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.games), label: 'Oyun'),
+            ]),
+        body: AnimatedSwitcher(
+          key: const ValueKey<int>(5477862),
+          duration: const Duration(milliseconds: 500),
+          child: pages[currentIndex],
+        ),
       ),
     );
   }

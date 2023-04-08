@@ -8,6 +8,9 @@ class InfoPage extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       children: [
+        SizedBox(
+            width: AppBar().preferredSize.width,
+            height: AppBar().preferredSize.height + 25),
         const Image(
           image: NetworkImage(
               'https://oyunveuygulamaakademisi.com/assets/site/oua/assets/sites/images/homepage-images/illustration_1.2.png'),
