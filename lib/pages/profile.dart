@@ -1,31 +1,39 @@
-import 'package:flutter/material.dart';
+import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
+  final user = FirebaseAuth.instance.currentUser!;
+  final userImageUrl = FirebaseAuth.instance.currentUser!.photoURL;
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
+    final userName = context.read<AppInfoBloc>().state.userName;
     return Scaffold(
       appBar: AppBar(
         title: Text('Profil'),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(height: 16),
-          CircleAvatar(
-            radius: 50,
-            backgroundImage: NetworkImage(user?.photoURL ?? ''),
+          Container(
+            child: CircleAvatar(
+              radius: 100,
+              backgroundImage:
+                  const AssetImage('assets/images/blankperson.jpg'),
+              foregroundImage:
+                  userImageUrl != null ? NetworkImage(userImageUrl!) : null,
+            ),
           ),
           SizedBox(height: 16),
           Text(
-            user?.displayName ?? '',
+            userName,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 24),
           ),
           SizedBox(height: 16),
           Text(
-            user?.email ?? '',
+            user.email!,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18),
           ),

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:app_jam_uygulama/pages/frame.dart';
 import 'package:app_jam_uygulama/pages/login_page.dart';
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
