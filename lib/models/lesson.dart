@@ -83,7 +83,7 @@ class HeaderTopics {
                   title: 'Dart Dilini ve IDE’yi Tanıma',
                   subtitle:
                       'Bu modülde örnek bir Flutter projesi ile Dart diline giriş yapacaksınız. Dart dilinin basit özelliklerini görecek, değişkenleri ve fonksiyonları tanıyacaksınız.',
-                  duration: '49',
+                  duration: '49dk',
                   lessons: [
                     Lesson(
                         title: 'Flutter: Örnek Proje',

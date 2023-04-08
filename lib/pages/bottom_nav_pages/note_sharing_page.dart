@@ -104,7 +104,10 @@ class _NoteSharingPageState extends State<NoteSharingPage> {
                                   ],
                                 ),
                               ));
-                        })
+                        }),
+                        const SizedBox(
+                          height: 90,
+                        )
                       ],
                     )),
     );

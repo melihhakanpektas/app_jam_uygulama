@@ -135,6 +135,9 @@ class InfoPage extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
+        const SizedBox(
+          height: 90,
+        )
       ],
     );
   }

@@ -37,6 +37,7 @@ class _LessonsPageState extends State<LessonsPage> {
       appBar: AppBar(
         titleSpacing: 0,
         title: Html(
+          key: const ValueKey<int>(153324572342),
           data: """
           <iframe width="${MediaQuery.of(context).size.width}" height="${MediaQuery.of(context).size.width * 0.54}" src="https://www.youtube.com/embed/$videoId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           """,
@@ -47,10 +48,6 @@ class _LessonsPageState extends State<LessonsPage> {
         ...List.generate(HeaderTopics.lessons.length, (index1) {
           final header = HeaderTopics.lessons[index1];
           return ExpansionTile(
-            onExpansionChanged: (value) => setState(() {
-              lessonIndex1 = index1;
-              context.read<AppInfoBloc>().setIndex(1, index1);
-            }),
             initiallyExpanded: lessonIndex1 == index1,
             textColor: Colors.blue,
             childrenPadding: const EdgeInsets.only(left: 20),
@@ -116,7 +113,10 @@ class _LessonsPageState extends State<LessonsPage> {
               })
             ],
           );
-        })
+        }),
+        const SizedBox(
+          height: 90,
+        )
       ]),
     );
   }

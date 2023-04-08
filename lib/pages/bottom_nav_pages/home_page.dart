@@ -189,6 +189,9 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(
+          height: 90,
+        )
       ],
     );
   }

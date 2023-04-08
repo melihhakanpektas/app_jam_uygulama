@@ -45,12 +45,12 @@ class MyApp extends StatelessWidget {
         title: 'Teacher Calendar',
         theme: ThemeData(
           brightness: Brightness.light,
-          colorSchemeSeed: Colors.blue,
+          colorSchemeSeed: Colors.white,
           //OTHER
           appBarTheme: const AppBarTheme(
-              centerTitle: false,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.blue),
+            centerTitle: false,
+            backgroundColor: Colors.white,
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red.shade600,
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark,
             textTheme: GoogleFonts.montserratTextTheme(
                 ThemeData(brightness: Brightness.dark).textTheme),
-            colorSchemeSeed: Colors.blue,
+            colorSchemeSeed: Colors.white,
             //OTHER
             appBarTheme: const AppBarTheme(
                 centerTitle: false,
