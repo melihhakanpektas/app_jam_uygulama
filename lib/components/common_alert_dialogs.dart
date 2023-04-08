@@ -1,8 +1,69 @@
+import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CommonAlertDialogs {
+  static shareNewNote(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final titleController = TextEditingController();
+        final subtitleController = TextEditingController();
+        final formKey = GlobalKey<FormState>();
+        return AlertDialog(
+          title: const Text('Not Paylaş'),
+          scrollable: true,
+          content: Form(
+            key: formKey,
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              TextFormField(
+                  controller: titleController,
+                  keyboardType: TextInputType.name,
+                  maxLength: 50,
+                  decoration: InputDecoration(
+                    filled: true,
+                    hintText: 'Başlık',
+                    hintStyle: TextStyle(color: Colors.grey[500]),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Boş bırakılamaz';
+                    }
+                    if (value.length < 7) return 'Çok Kısa';
+                  }),
+              TextFormField(
+                controller: subtitleController,
+                maxLength: 5000,
+                decoration: InputDecoration(
+                  filled: true,
+                  hintText: 'Açıklama',
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Boş bırakılamaz';
+                  if (value.length < 50) return 'Çok Kısa';
+                },
+                maxLines: null,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    CommonAlertDialogs.loadingScreen(context);
+                    FirebaseFirestore.instance.collection('notes').doc().set({
+                      'title': titleController.text,
+                      'subtitle': subtitleController.text,
+                      'uid': FirebaseAuth.instance.currentUser!.uid,
+                      'name': context.read<AppInfoBloc>().state.userName,
+                      'date': Timestamp.now()
+                    }).then((value) => Navigator.of(context)
+                      ..pop()
+                      ..pop());
+                  },
+                  child: const Text('Paylaş'))
+            ]),
+          ),
+        );
+      });
   static loadingScreen(BuildContext context) => showDialog(
       context: context,
       builder: (BuildContext context) => Center(
@@ -10,7 +71,8 @@ class CommonAlertDialogs {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                    width: 50, child: Image.asset('assets/images/logo.png')),
+                    width: 50,
+                    child: Image.asset('assets/images/oua_logo.png')),
                 const SizedBox(
                   height: 16,
                 ),
@@ -32,7 +94,7 @@ class CommonAlertDialogs {
             mainAxisSize: MainAxisSize.min,
             children: [
               // full name
-              TextField(
+              TextFormField(
                 controller: nameController,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -43,7 +105,7 @@ class CommonAlertDialogs {
               ),
               const SizedBox(height: 10),
               // email
-              TextField(
+              TextFormField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -54,7 +116,7 @@ class CommonAlertDialogs {
               ),
               const SizedBox(height: 10),
               // password
-              TextField(
+              TextFormField(
                 controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -65,7 +127,7 @@ class CommonAlertDialogs {
               ),
               const SizedBox(height: 10),
               // confirm password
-              TextField(
+              TextFormField(
                 controller: confirmPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(

@@ -173,7 +173,9 @@ class HomePage extends StatelessWidget {
                             child: Text(
                               '${DateFormat('MMMM', 'tr_TR').format(DateTime(2023, details.date.month))} ${details.date.year}',
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white),
                             ),
                           ),
                         ),

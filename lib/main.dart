@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
-import 'providers/preferences_bloc.dart';
+import 'providers/app_info_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

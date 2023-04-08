@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app_jam_uygulama/pages/frame.dart';
 import 'package:app_jam_uygulama/pages/login_page.dart';
-import 'package:app_jam_uygulama/providers/preferences_bloc.dart';
+import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
