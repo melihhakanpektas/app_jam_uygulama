@@ -3,6 +3,8 @@ import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/note_sharing/note_sharing_page.dart';
 
 class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({super.key});
@@ -52,6 +54,8 @@ class HomePageDrawer extends StatelessWidget {
             leading: Icon(Icons.book),
             title: Text('Dersler'),
             onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LessonsPage()));
               // Burada dersler sayfasına yönlendirebilirsiniz
             },
           ),
@@ -66,6 +70,8 @@ class HomePageDrawer extends StatelessWidget {
             leading: Icon(Icons.note),
             title: Text('Not Paylaşımı'),
             onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NoteSharingPage()));
               // Burada not paylaşımı sayfasına yönlendirebilirsiniz
             },
           ),
