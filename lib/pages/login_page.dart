@@ -1,4 +1,4 @@
-import 'package:app_jam_uygulama/pages/common_alert_dialogs.dart';
+import 'package:app_jam_uygulama/components/common_alert_dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

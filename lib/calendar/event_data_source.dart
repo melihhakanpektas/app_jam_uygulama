@@ -18,17 +18,10 @@ class EventDataSource extends CalendarDataSource<Event> {
       Event(
           id: customData.id,
           title: customData.title,
-          studentIdList: customData.studentIdList,
-          studentEmailList: customData.studentEmailList,
-          teacherEmail: customData.teacherEmail,
           fromDate: appointment.startTime,
           toDate: appointment.endTime,
-          lessonFee: customData.lessonFee,
-          notificationTime: customData.notificationTime,
-          isEveryWeek: customData.isEveryWeek,
           status: customData.status,
-          url: customData.url,
-          index: customData.index);
+          url: customData.url);
 
   @override
   Event getId(int index) => getEvent(index);
