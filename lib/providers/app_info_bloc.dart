@@ -12,7 +12,7 @@ class AppInfoBloc extends Cubit<AppInfo> {
           AppInfo(
             url: null,
             userName: 'User Name',
-            pageIndex: 0,
+            pageIndex: 2,
             lessonIndex1: 0,
             lessonIndex2: 0,
             lessonIndex3: 0,
