@@ -18,12 +18,15 @@ class LessonTopics {
   final String subtitle;
   final String duration;
   final List<Lesson> lessons;
+  List<ModuleQuestions>? questions;
 
-  LessonTopics(
-      {required this.title,
-      required this.subtitle,
-      required this.duration,
-      required this.lessons});
+  LessonTopics({
+    required this.title,
+    required this.subtitle,
+    required this.duration,
+    required this.lessons,
+    this.questions,
+  });
 }
 
 class HeaderTopics {
@@ -49,6 +52,111 @@ class HeaderTopics {
             color: Colors.blue,
             subtopics: [
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            "Bilgisayarımıza tam anlamıyla Flutter kurmuş olmak için neler kurmamız gerekir?",
+                        answers: [
+                          "Flutter SDK",
+                          'Native (Android veya iOS) SDK ',
+                          'IDE pluginleri',
+                          'Hepsi'
+                        ],
+                        trueIndex: 3),
+                    ModuleQuestions(
+                        question:
+                            "Aşağıdakilerden hangisini flutter doctor komutu kontrol etmez?",
+                        answers: [
+                          "Flutter SDK'nın güncel olup olmadığı",
+                          "Flutter projemizde hata olup olmadığı----------",
+                          "Android SDK'nın kurulu olup olmadığı",
+                          "Android Studio'da Flutter plugininin kurulu olup olmadığı"
+                        ],
+                        trueIndex: 1),
+                    ModuleQuestions(
+                        question:
+                            """Örnek proje yaratırken yazdığımız organization değeri ne işe yarar?""",
+                        answers: [
+                          "Bir nevi kendi imzamız gibi, bu uygulamanın bize ait olduğunu bize hatırlatır.",
+                          "Kodumuzun içinde her Dart dosyasının başındaki yorum satırlarında ismimiz ile birlikte geçer.",
+                          "Kullanacağımız kütüphanelerin hangileri olduğunu seçmemize yarar."
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ayşe Flutter kurmak istiyor. Flutter SDK'sını indireceği sayfada bulunan SDK releases linkine tıkladığında karşısına birkaç farklı channel seçeneği çıkıyor. Bunları en eski fakat kararlı çalışan versiyondan en yeni fakat hata barındırabilen versiyona doğru sıralar mısınız?
+
+I. master
+
+II. stable
+
+III. dev
+
+IV. beta""",
+                        answers: [
+                          "IV-III-II-I",
+                          "II-III-I-IV",
+                          "II-IV-III-I --------------",
+                          "III-II-I-IV"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ali Flutter'ı indirdi fakat komut satırına flutter yazdığında bu komut bulunamıyor. Bu hangi nedenlerden olabilir?
+
+I. Zip dosyasını açmamış olabilir
+
+II. Android Studio kurmamış olabilir
+
+III. Zip dosyasını açınca çıkan bin klasörünü PATH değişkenine eklememiş olabilir.
+
+IV. Android Studio'ya Flutter pluginini kurmamış olabilir.
+
+V. İnterneti kopmuş olabilir""",
+                        answers: [
+                          "I-III -----------",
+                          "I-II-IV",
+                          "III-IV-V",
+                          "I-III-V"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ayşe Flutter ve Android Studio kurdu, fakat nedense Android Studio'da bir Flutter uygulaması projesini açabiliyor fakat çalıştıramıyor. Halbuki, Android Studio'da Flutter olmayan bir native Android uygulaması projesini problemsiz çalıştırabiliyor. Problem aşağıdakilerden hangisi veya hangileri olabilir?
+
+I. Android Emulator kurmamıştır.
+
+II. Android SDK'yı kurmamıştır.
+
+III. Flutter SDK kurmamıştır.
+
+IV. Kurmuş olduğu Flutter SDK'nın nerede olduğunu Android Studio'ya belirtmemiştir.""",
+                        answers: [
+                          "I-II-IV",
+                          "I-III-IV",
+                          "III-IV ---------------",
+                          "II-III"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Can Android Studio'yu kullanarak örnek bir Flutter uygulaması yarattı. Ekranda gördüğü play tuşuna basıyor fakat uygulamanın çalıştığını göremiyor. Hangisi veya hangileri olmuş olabilir?
+
+I. Bilgisayara kablo ile bağlı ve geliştirme yapmak için ayarlanmış bir telefon olmayabilir.
+
+II. Android Studio'yu kurarken emülator yaratmamış olabilir.
+
+III. Bilgisayar internete bağlı olmadığından gerekli kütüphaneleri indiremiyor olabilir.
+
+IV. Henüz kod yazmadığı için çalışacak bir proje olmaması normal bir durumdur.""",
+                        answers: [
+                          "III-IV",
+                          "I-II",
+                          "II-III-IV",
+                          "I-II-III-----------"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Flutter Kurulumu',
                   subtitle:
                       "Bu modülde Flutter ile uygulama geliştirmek için gereken programları bilgisayarınıza kurmayı öğreneceksiniz. Bu programları tanıyacak, gereken ayarları yapmayı öğrenecek ve örnek proje yaratmayı göreceksiniz.",
@@ -80,6 +188,120 @@ class HeaderTopics {
                         duration: '9dk'),
                   ]),
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Ali yeni bir fonksiyon tanımladı. Bu fonksiyonu çağırıp ona parametre gönderirken bir problem yaşıyor. Ali parametrelerin isimlerini yazıp, iki nokta üstüste koyup sonra parametrenin değerini yazmak istedi. Fakat parametre ismini yazdığı noktada hata alıyor. Problem hangisi veya hangileri olabilir?
+
+I. Tanımladığı fonksiyon hiçbir parametre beklemeyen bir fonksiyon olabilir.
+
+II. Tanımladığı fonksiyondaki parametre isimleri ile fonksiyonu çağırırken kullandığı parametre isimleri aynı olmayabilir.
+
+III. Tanımladığı fonksiyondaki parametreler küme parantezi içine alınmamış olabilir.
+
+IV. Verdiği parametrenin veri türü yanlış olabilir (rakam beklenen yere harf girmesi gibi).""",
+                        answers: [
+                          "II-III-IV",
+                          "I-II-III-----------",
+                          "II-III",
+                          "I-II-IV"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ayşe Flutter'ın bir Dart uygulamasından farkını anlamak istiyor ve geliştirme yaparken basit tekrar çalıştırma ve hata ayıklama mekanizmalarını keşfetmeye çalışıyor. Ona yardımcı olur musunuz? Flutter Uygulaması;
+
+I. Bir Dart uygulamasıdır
+
+II. Dart uygulaması değildir. Flutter uygulamasını console uygulaması haline çevirirsek onu çalıştırdığımızda;
+
+III. Bilgisayarda çalışır IV. Telefonda çalışır ama telefon ekranında bir şey göstermez
+
+V. Telefonda çalışır ve telefonda sadece bembeyaz bir ekran gösterir.""",
+                        answers: [
+                          "I-V------------",
+                          "II-III-IV",
+                          "I-III-IV",
+                          "II-V"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ali programında tekrar tekrar aynı hesaplamayı yapan kodu yazdığını farkediyor. Hem yoruluyor, hem de bu kodu değiştirmek istediğinde bütün kopyalarını değiştirmesi gerektiğini biliyor. Bu durumu iyileştirmek için ne yapabilir?
+
+I. Refactor ederek bu hesaplamayı bir fonksiyon haline getirebilir.
+
+II. Find/Replace yaparak bu hesaplamanın geçtiği yerleri, bu hesaplamayı yapan fonksiyon ile değiştirebilir.
+
+III. Bu hesaplamayı yapmaktan vazgeçip daha basit bir uygulama yazabilir.
+
+IV. Bir daha her hesaplamayı mutlaka fonksiyon yazarak yapması gerektiğini kendisine hatırlatabilir.""",
+                        answers: [
+                          "I-II-IV",
+                          "I-IV",
+                          "I-II-----------------",
+                          "III"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Ceyda'nın yazdığı bir fonksiyonun 3 tane parametresi var, fakat sonuncu parametreyi bazen vermeden bu fonksiyonu çağırabilmek istiyor. Bunu nasıl gerçekleştirebilir?
+
+I. Aynı isme sahip 2 ve 3 parametreli iki fonksiyon tanımlar
+
+II. Son parametreyi köşeli parantez içerisine alarak opsiyonel hale getirebilir
+
+III. Son parametreyi küme parantezi içerisine alarak opsiyonel ve isimli hale getirebilir, ancak bu parametreyi kullanacak olursa parametrenin ismini de vermesi gerekir.
+
+IV. Bu mümkün değildir.""",
+                        answers: [
+                          "IV",
+                          "I-III",
+                          "II-III---------------",
+                          "I-II-III"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kod içinde kullanılan bir değeri hızlıca bir değişkene almak için ne yapabiliriz?""",
+                        answers: [
+                          "Ctrl-space, introduce variable",
+                          "Ctrl-enter, introduce variable",
+                          "Alt-enter, introduce variable",
+                          "Ctrl-Alt-Shift-T, introduce variable---------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Gereken her detay için bir print satırı eklemek""",
+                        answers: [
+                          "Gereken her detay için bir print satırı eklemek",
+                          "Koda breakpoint ekleyip debugger ile incelemek-----------",
+                          "Objeyi JSON gibi bir formata serialize edip onu print etmek",
+                          "Kodu dikkatlice inceleyip çıkarımlarda bulunmak"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Çağırdığımız bir fonksiyonun döndüğü değeri, veri türü belirtmeden "var" ile tanımladığımız bir değişkene attık. Bu değerin veri türünün ne olduğunu anlamanın en pratik yolu nedir?""",
+                        answers: [
+                          "Alt-Enter, add type annotation--------------",
+                          "Ctrl-Alt-Shift-T, add type annotation",
+                          "Ctrl-Space, add type annotation",
+                          "Ctrl-Alt-Shift-T, extract method"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Fonksiyon tanımlamasında kullanılan => şeklindeki ok işareti ile ilgili hangisi doğrudur?""",
+                        answers: [
+                          "Sadece iki ifade içerip hiçbir değer dönmeyen fonksiyonlar için kullanılabilir",
+                          "Sadece tek ifade içerip o ifadenin değerini dönen fonksiyonlar için kullanılabilir-------------",
+                          "Birden fazla ifade içerip onlardan ilkinin değerini dönen fonksiyonlar için kullanılabilir",
+                          "void fonksiyonlar için kullanılamaz"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Dart Dilini ve IDE’yi Tanıma',
                   subtitle:
                       'Bu modülde örnek bir Flutter projesi ile Dart diline giriş yapacaksınız. Dart dilinin basit özelliklerini görecek, değişkenleri ve fonksiyonları tanıyacaksınız.',
@@ -119,6 +341,106 @@ class HeaderTopics {
             color: Colors.blue,
             subtopics: [
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Yıllık geliri 100.000 \$'ın altında olan bir unity geliştiricisi hangi lisans türünü kullanması doğrudur ?""",
+                        answers: [
+                          "Personel----------",
+                          "Pro",
+                          "Plus",
+                          "Entreprise"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Unity Hub'ta hangi sekmeyi kullarak unity programını yükleyebiliriz ?""",
+                        answers: [
+                          "Project",
+                          "Installs-----------",
+                          "Learn",
+                          "Community"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Unity ile oyun geliştirme yapabilmek için visaul studio ile hangi yazılım paketini indirmemiz gerekiyor ?""",
+                        answers: [
+                          "Game Development with Unity--------------",
+                          "Python Development",
+                          "Game Development with C++",
+                          "Azure Development"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question: """Unity'nin kullanım alanları nelerdir?""",
+                        answers: [
+                          "Oyun Geliştirme",
+                          "Animasyon Yapımı",
+                          "Otomotiv Sektörü",
+                          "Hepsi---------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Jetbrains ürünlerinde education lisansını kullanabilme şartı nedir ?""",
+                        answers: [
+                          "Para kazanıyor olmak",
+                          "Öğrenci veya öğretim üyesi olmak-----------",
+                          "Geliştirici olmak",
+                          "Daha önceden jetbrains ürünleri kullanmış olmak"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Unity ile ilgili yargılardan hangisi doğrudur ?""",
+                        answers: [
+                          "Unity kullanımı ücretili bir yazılımdır.",
+                          "Unity lisansları olan ve bu lisanslara göre ücreti şekillenen bir yazılımdır.------",
+                          "Unity ile sadece oyunlar yapılabilmektedir.",
+                          "Unity'nin personel lisansı ücretlidir."
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Unity Hub ile ilgili yargılardan hangisi yanlıştır?""",
+                        answers: [
+                          "Unity hub kullanarak yeni projeler oluşturulabilir.",
+                          "Unity hub kullanarak örnek projeler indirilebilir.",
+                          "Unity hub lisanslama için kullanılabilir.",
+                          "Unity hub kod yazmaya yarayan bir editördür.-----------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question: """Visual Studio nedir?""",
+                        answers: [
+                          "Kod yazmamıza yarayan bir IDE-------------",
+                          "Oyun motoru",
+                          "Sadece C# kodu yazmaya yarayan bir IDE",
+                          "Unity ile kullanılması zorunlu olan bir IDE"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Seçeneklerden hangisi unity'nin kullanım alanlarından değildir?""",
+                        answers: [
+                          "Oyun geliştirme",
+                          "Animasyon ve modelleme",
+                          "3D model baskısı--------------",
+                          "VR & AR"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """JetBrains, içerisinde hangi IDE(Integrated Development Environment)'yi bulundurur?""",
+                        answers: [
+                          "Sublime Text",
+                          "Visual Studio",
+                          "Rider----------------",
+                          "Eclipse"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Unity ile Oyun Geliştirmeye Giriş',
                   subtitle: "Giriş ve Kurulumlar",
                   duration: '47dk',
@@ -165,6 +487,124 @@ class HeaderTopics {
                         duration: '3dk'),
                   ]),
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Hangi programlama dili ile unity'de kod yazabilirsiniz ?""",
+                        answers: [
+                          "C#----------------",
+                          "Python",
+                          "Javascipt",
+                          "C++"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Console uygulaması içinde "Unity" yazdırmak istiyorsam hangi kodu kullanmak gerekir ?""",
+                        answers: [
+                          "print(Unity)",
+                          "Console.WriteLine (Unity)",
+                          "print(Unity)",
+                          """Console.WriteLine("Unity") ------------------------"""
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Seçeneklerden hangisi yorum satırına alma işlemini doğru şekilde yapmıştır?""",
+                        answers: [
+                          "//print(Unity)-------------------",
+                          "###Console.WriteLine(Unity)",
+                          "<--!>console.WriteLine( Unity)",
+                          "'Console.WriteLine ('unity dersleri')"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kullanıcı tarafından yazılan kodun bilgisayar diline çevirilme işlemine ne ad verilir?""",
+                        answers: [
+                          "syntax",
+                          "compilation--------------",
+                          "run",
+                          "play"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Console uygulamamızın hemen kapanmaması için hangi kodu kodlarımızın altına yazmalıyız?""",
+                        answers: [
+                          "Console.WriteLine()",
+                          "Console.ReadLine()-------------",
+                          "Console.Write()",
+                          "Console.print()"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Bir alt satıra geçebilmek için Console.WriteLine() kullanımı dışında hangi ifade kullanılabilir?""",
+                        answers: ["\t", "/n", "/t", "\n-------------"],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """C# dili, hangi IDE(Integrated Development Environment) ile yazılır?
+""",
+                        answers: [
+                          "Visual Studio",
+                          "Sublime Text",
+                          "Notepad++",
+                          "Hepsi kullanılabilir--------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Konsol uygulamalarında yazdığımız kodların çıktılarını nerede görüntüleriz?""",
+                        answers: [
+                          "Command Promt(cmd)'da----------------",
+                          "Kodlarımızın altında",
+                          "Tarayıcıda",
+                          "Unity'de"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kodumuzun içerisinde işlenmesini istemediğimiz metinleri belirtmemizi sağlayan, hem kendimiz hem de başkaları için notlar bırakabildiğimiz yapının adı nedir?""",
+                        answers: [
+                          "Fonksiyon",
+                          "Sınıf",
+                          "Yorum Satırı----------------",
+                          "Değişken"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Konsol uygulamaları çalıştırıldığında otomatik çağırılan, ilk çalıştırılan metodun adı nedir?""",
+                        answers: [
+                          "BeginWith()",
+                          "Main()---------------",
+                          "Start()",
+                          "Begin()"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Console.WriteLine() kodunu çalıştırdıktan hemen sonra konsolda imleç nerede bulunur?""",
+                        answers: [
+                          "İki alt satırda",
+                          "Bir alt satırda-----------------",
+                          "Sağında",
+                          "Solunda"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """\n ifadesi, Console.Write() komutu içerisinde kullanılınca ne işe yarar?""",
+                        answers: [
+                          "Satırı tamamen yorum satırı haline getirir.",
+                          "Öncesindeki kelimenin yazılmasını engeller.",
+                          "İmleci bir alt satıra geçirir.----------------",
+                          "Kendinden sonraki kelimelerin yazılmasını engeller."
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Programlamaya Giriş',
                   subtitle:
                       'Bu modülümüzde, Unity oyun motorunun desteklediği ana dil olan C# dilini öğrenmeye başlayacağız. C# programlama dili nedir, kimindir, nerelerde kullanılabilir, temel olarak yazım şekli nasıldır gibi konulardan bahsedip basit bir Hello World uygulaması ile kod yazmaya giriş yapacağız. Konsola birtakım çıktılar verip alabileceğimiz temel hatalar üzerinde konuşacağız.',
@@ -221,6 +661,103 @@ class HeaderTopics {
             color: Colors.blue,
             subtopics: [
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """‘’Dijital Oyun yapımı’’ için temel olarak nelere ihtiyaç vardır?""",
+                        answers: [
+                          "Sadece yazılım",
+                          "Sadece dijital sanat",
+                          "Hem yazılım hem de dijital sanat----------",
+                          "Dijital sanat ve karakterler"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi oyun yapımında ‘’tarz’’ seçerken hitap ettiği kitleye göre dikkat etmemiz gereken etkenlerden biri değildir?""",
+                        answers: [
+                          "Oyuncu kitlesinin yaşına göre",
+                          "Oyunun konusuna göre",
+                          "Oyunun çizim tarzına göre",
+                          "Oyuncu kitlesinin ekonomik durumuna göre ----------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi Konsept Tasarım Hiyerarşisinden birisi değildir?""",
+                        answers: [
+                          "Karakterler",
+                          "Yazılım-------------",
+                          "Tarz",
+                          "Mekan"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi ‘’üretim öncesi konsept tasarımların’’ yapılış nedenlerinden birisi değildir?""",
+                        answers: [
+                          "Tarzı belirlemek",
+                          "Oyuna güzel görünüm kazandırmak-------------",
+                          "Oyuna en uygun görselin seçilmesi",
+                          "Çizim tarzının belirlenmesi"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi obje tasarımları yapılmadan önce dikkat edilmesi gereken özelliklerden birisi değildir?""",
+                        answers: [
+                          "Oyuncunun isteğine göre---------------",
+                          "Oyunun konusuna göre",
+                          "Oyun konusunun tarihine göre",
+                          "Oyuncu yaş kitlesine göre"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi oyunlarda kullanılmayan karakter türlerindendir?""",
+                        answers: [
+                          "Yan Karakterler",
+                          "NPC (Oyuncu olmayan karakterler)",
+                          "Düşman karakterler"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Mekan Tasarımları öncelikle neye bağlı olarak tasarlanmaya başlar?﻿""",
+                        answers: [
+                          "Hikaye ve Çağ’a uygun olarak-----------------",
+                          "Karakterlere uygun olarak",
+                          "Renklere uygun olarak"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi ‘’Kullanıcı Arayüzü’’ ikonları içinde yer almaz?""",
+                        answers: [
+                          "Oyuncu envanter çantası ikonu",
+                          "Oyun içinde özel kullanılan elmas ikonu",
+                          "Oyuncunun silahları------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi ‘’referansın’’ kullanım açısından ilk açıklaması olabilir?""",
+                        answers: [
+                          "Taklit etmek",
+                          "Aynısını kullanmak",
+                          "İlham almak------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Eskiz yapım aşaması hangi aşama sonrası yapılmaktadır?""",
+                        answers: [
+                          "Renklendirme",
+                          "Işık ve gölge",
+                          "Referans---------------"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Temel Sanat',
                   subtitle:
                       "Eğitimimize Temel Sanat modülümüzle başlangıç yapıp, oyun için sanatın ne demek olduğunu, sanat çeşitlerini, konsept ve obje tasarımı gibi teorik konuları işleyeceğiz.",
@@ -306,6 +843,103 @@ class HeaderTopics {
                         duration: '4dk'),
                   ]),
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi 2D Dijital Sanatın dalları arasından sayılmaz?""",
+                        answers: [
+                          "Çevre Konsept Tasarımı",
+                          "Karakter Konsept Tasarımı",
+                          "Obje Konsept Tasarımı"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Piksel Sanatı en kolay nasıl tanımlayabiliriz?""",
+                        answers: [
+                          "Minik karelerden oluşan sanat türü---------------------",
+                          "Yarı gerçekçi görünüme sahip sanat türü",
+                          "Stilize edilmiş görünüme sahip sanat türü"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi ‘’Oyun Arayüzü’’ içinde bulunmaz?""",
+                        answers: [
+                          "Karakterin elbiseleri------------------",
+                          "Ayarlar",
+                          "Çıkış"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Üretim öncesi konsept tasarımları hazırlanırken kaç tane örnek çizim yapılır?""",
+                        answers: [
+                          "Bir tane",
+                          "Sekiz tane",
+                          "On ve daha fazlası------------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """2D obje konsept tasarım sunumları oyun yapım aşamasında diğer hangi bölüm için hazırlanır?""",
+                        answers: [
+                          "Yazılım Bölümü",
+                          "Senaryo Bölümü",
+                          "3D Modelleme Bölümü---------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Karakter eskizi yaparken diğer konsept tasarımlarından farklı olarak ne yaparız ?""",
+                        answers: [
+                          "Referans Araştırması",
+                          "Detaylandırma",
+                          "Anatomi-------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Mekan eskizleri yaparken diğer konsept tasarımlarından farklı olarak ne yaparız?""",
+                        answers: [
+                          "Renkler",
+                          "Perspektif---------------------",
+                          "Detaylandırma"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Mekanik Tasarım eskizleri yaparken diğer konsept tasarımlarından farklı olarak ne yaparız?""",
+                        answers: ["Detaylandırma", "Anatomi", "Perspektif"],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi ‘’Kullanıcı Arayüzü’’nün ek olan menülerinden birisidir?""",
+                        answers: [
+                          "Ayarlar Menüsü",
+                          "Özel Görev Kazanımları Menüsü-------------------------",
+                          "Ses Menüsü"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Gerçek tarihten alınamayan referanslar için nerelere bakılması uygun olabilir?""",
+                        answers: [
+                          "Hayal Gücü---------------------",
+                          "İnternet",
+                          "Gazeteler"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi eskiz yapımının nedenlerinden birisi değildir?""",
+                        answers: [
+                          "Soyut olan fikirleri en kısa sürede somut hale getirerek sergilemek için",
+                          "Daha fazla fikrin ortaya çıkmasını sağlamak için",
+                          "Birkaç örnek yapıp konuya bağlı kalmadan bütün çizimleri oyuna aktarıp fazla göstermek için------------"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: '2D Sanat ve Daha Fazlası',
                   subtitle:
                       'Temel Sanat konusundaki teorik bilgilerimizi derinleştireceğimiz bu modülümüzde anatomi, renkler ve ışıklar, perspektif, mimikler gibi oldukça önemli konuları işlerken oyun endüstrisindeki kullanımlar hakkında bilgi sahibi olacağız.',
@@ -402,13 +1036,6 @@ class HeaderTopics {
                         duration: '5dk'),
                   ])
             ]),
-
-//////////////////////////////////////////////////////////////////////////////////
-        ///
-//////////////////////////////////////////////////////////////////////////////////
-        ///
-//////////////////////////////////////////////////////////////////////////////////
-
         HeaderTopics(
             title: 'Yazılımcılar İçin İngilizce Eğitimi',
             description:
@@ -588,305 +1215,516 @@ class HeaderTopics {
                         duration: '6dk'),
                     //Lesson(title: '', subtitle: '', url: '', duration: 'dk'),
                   ]),
-
-
-
               LessonTopics(
                   title: 'Reading Practice',
                   subtitle:
                       'Bu modülde okuma parçaları üzerinden birçok çalışma yapacaksınız. Parçada yer alan metni çevri yaparak kavrayacak, eğitmenimiz ile birlikte çeviri yapmayı öğrenecek ve metinde çeviri yaparken bilmeniz gereken önemli noktaları görecek; bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.',
                   duration: '104dk',
                   lessons: [
-                    Lesson(title: 'Modül Girişi', subtitle: "", url: 'https://youtu.be/bJGoFKSrlD4', duration: '1dk'),
-                    Lesson(title: 'READING - WHAT IS UNITY PART 1', subtitle: "Bu derste, bir okuma parçası ele alınacaktır. Parçada yer alan \"Unity nedir?\" metni ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.", url: 'https://youtu.be/Daa_3Dup_x8', duration: '15dk'),
-                    Lesson(title: 'READING - WHAT IS UNITY (VOCABULARY) PART 2', subtitle: "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz", url: 'https://youtu.be/11SJeDeJjcY', duration: '7dk'),
-                    Lesson(title: 'READING-WHAT IS A UNITY DEVELOPER AND WHY USE UNITY PART 1', subtitle: "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.", url: 'https://youtu.be/YKaaxtIIunc', duration: '14dk'),
-                    Lesson(title: 'READING-WHAT IS A UNITY DEVELOPER AND WHY USE UNITY (VOCABULARY) PART 2', subtitle: "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.", url: 'https://youtu.be/GfUz3pUrB-A', duration: '13dk'),
-                    Lesson(title: 'READING-ADVANTAGES OF USING UNITY PART 1', subtitle: "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.", url: 'https://youtu.be/lRIWYBKjjJQ', duration: '11dk'),
-                    Lesson(title: 'READING-ADVANTAGES OF USING UNITY (VOCABULARY) PART 2', subtitle: "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.", url: 'https://youtu.be/nVsMweTdtdo', duration: '8dk'),
-                    Lesson(title: 'READING- HIRING UNITY DEVELOPERS PART 1', subtitle: "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.", url: 'https://youtu.be/5qwSGjwb0a4', duration: '11dk'),
-                    Lesson(title: 'READING- HIRING UNITY DEVELOPERS (VOCABULARY) PART 2', subtitle: "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.", url: 'https://youtu.be/O9pJuVwzaj0', duration: '9dk'),
+                    Lesson(
+                        title: 'Modül Girişi',
+                        subtitle: "",
+                        url: 'https://youtu.be/bJGoFKSrlD4',
+                        duration: '1dk'),
+                    Lesson(
+                        title: 'READING - WHAT IS UNITY PART 1',
+                        subtitle:
+                            "Bu derste, bir okuma parçası ele alınacaktır. Parçada yer alan \"Unity nedir?\" metni ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.",
+                        url: 'https://youtu.be/Daa_3Dup_x8',
+                        duration: '15dk'),
+                    Lesson(
+                        title: 'READING - WHAT IS UNITY (VOCABULARY) PART 2',
+                        subtitle:
+                            "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz",
+                        url: 'https://youtu.be/11SJeDeJjcY',
+                        duration: '7dk'),
+                    Lesson(
+                        title:
+                            'READING-WHAT IS A UNITY DEVELOPER AND WHY USE UNITY PART 1',
+                        subtitle:
+                            "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.",
+                        url: 'https://youtu.be/YKaaxtIIunc',
+                        duration: '14dk'),
+                    Lesson(
+                        title:
+                            'READING-WHAT IS A UNITY DEVELOPER AND WHY USE UNITY (VOCABULARY) PART 2',
+                        subtitle:
+                            "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.",
+                        url: 'https://youtu.be/GfUz3pUrB-A',
+                        duration: '13dk'),
+                    Lesson(
+                        title: 'READING-ADVANTAGES OF USING UNITY PART 1',
+                        subtitle:
+                            "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.",
+                        url: 'https://youtu.be/lRIWYBKjjJQ',
+                        duration: '11dk'),
+                    Lesson(
+                        title:
+                            'READING-ADVANTAGES OF USING UNITY (VOCABULARY) PART 2',
+                        subtitle:
+                            "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.",
+                        url: 'https://youtu.be/nVsMweTdtdo',
+                        duration: '8dk'),
+                    Lesson(
+                        title: 'READING- HIRING UNITY DEVELOPERS PART 1',
+                        subtitle:
+                            "Bu derste, yine okuma parçası ele alınacaktır. Parçada yer alan metin ile çeviri yapmayı öğrenirken bazı yapıların kullanımını ve önemli kelimeleri öğreneceksiniz.",
+                        url: 'https://youtu.be/5qwSGjwb0a4',
+                        duration: '11dk'),
+                    Lesson(
+                        title:
+                            'READING- HIRING UNITY DEVELOPERS (VOCABULARY) PART 2',
+                        subtitle:
+                            "Bu derste, okuma parçasında yer alan önemli kelimeleri ve anlamlarını öğreneceksiniz.",
+                        url: 'https://youtu.be/O9pJuVwzaj0',
+                        duration: '9dk'),
                     Lesson(title: '', subtitle: "", url: '', duration: 'dk'),
-
-
                   ])
             ]),
-HeaderTopics(
+        HeaderTopics(
             title: 'Temel Girişimcilik',
             description:
-            'Yeni nesil girişim dünyasında var olmak için çıkacağın bu yolculukta ihtiyacın olacak tüm unsurları öğreneceksin.',
+                'Yeni nesil girişim dünyasında var olmak için çıkacağın bu yolculukta ihtiyacın olacak tüm unsurları öğreneceksin.',
             duration: '338dk',
             color: Colors.blue,
             subtopics: [
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdaki sorulardan hangisi bize kullanıcının iç görüsü hakkında bilgi verir?""",
+                        answers: [
+                          "Kırmızı bir araba mı seçtin?",
+                          "Seçimini ne zaman yaptın?",
+                          "Arabanın rengini nasıl seçtin?-------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kullanıcının verdiği yanıtta derine inmek ve temel motivasyona ulaşmak için kullanılan yöntemlerden biri … yöntemidir.""",
+                        answers: [
+                          "Motivasyon Bulma",
+                          "İçgörü Sorgulama",
+                          "5N1K"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """İç görüleri gruplandırmada/ kümelemede kullandığımız method nedir?""",
+                        answers: [
+                          "Affinity Mapping (Kümeleme)-----------------",
+                          "Lean (Yalın) Canvas",
+                          "Business Model Canvas (İş Modeli Kanvası)"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Empati haritasında hangi kadranlar bulunmuyor?""",
+                        answers: [
+                          "Ne düşünüyor?",
+                          "Ne izliyor?-----------------------",
+                          "Ne hissediyor?"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Fikir geliştirmede tasarım odaklı düşünme yöntemlerince fikir nasıl geliştirilmelidir?""",
+                        answers: [
+                          "Az ve net",
+                          "Az ve uçuk",
+                          "Fikir değersizdir"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Geliştirmelerimizi yaparken odağımız ne olmalı?""",
+                        answers: [
+                          "Kullanıcı---------------",
+                          "Tasarım",
+                          "Maaliyet"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Kullanıcı İçgörüsü Toplama ve Sentezleme',
-                  subtitle:
-                      "",
+                  subtitle: "",
                   duration: '24dk',
                   lessons: [
                     Lesson(
                         title: 'Kullanıcı İçgörüsü Toplama ve Sentezleme 1',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://www.youtube.com/watch?v=RKwJwCaaFec',
                         duration: '12dk'),
                     Lesson(
                         title: 'Kullanıcı İçgörüsü Toplama ve Sentezleme 2',
-                        subtitle:
-                            '',
+                        subtitle: '',
                         url: 'https://youtu.be/fLc6xbVjjOs',
                         duration: '10dk'),
                     Lesson(
                         title: 'Kullanıcı İçgörüsü Toplama ve Sentezleme 3',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/sxPi5_lVWkw',
                         duration: '4dk'),
                   ]),
               LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi fikir doğrulama yöntemleri adımlarından biri değildir?""",
+                        answers: [
+                          "Problem tanımı",
+                          "Çözüm tanımı",
+                          "Çözümün patentinin alınması--------------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Hangisi sahada problemi doğrulama yöntemlerinden değildir?""",
+                        answers: [
+                          "Anket yapmak",
+                          "Şirketi kurmak-----------------------",
+                          "Kullanıcıya denetmek"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question: """Hangileri 3H’ya dahil değildir?""",
+                        answers: ["Hipster", "Hustler", "Hacker"],
+                        trueIndex: 0),
+                    ModuleQuestions(question: """MVP nedir?""", answers: [
+                      "Most Valuable Player",
+                      "Most Viable Product",
+                      "Most Valuable Product"
+                    ], trueIndex: 0),
+                    ModuleQuestions(
+                        question: """Ürüne değil …’ya aşık ol.""",
+                        answers: [
+                          "Problemine---------------------",
+                          "Çözümüne",
+                          "Takımına"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Yalın kanvasın hangi kutucuğuna “Kaç Oldu?” sorusunun cevabını yazarız?""",
+                        answers: [
+                          "Benzersiz değer önerisi",
+                          "Kilit metrikler------------------------",
+                          "Kanallar"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Erken benimseyenlere ne yapmak için ulaşırız?""",
+                        answers: [
+                          "Çözümümüzü kullandırmak ve geri bildirim almak-----------------------",
+                          "Para almak ve geri bildirim almak",
+                          "Geri bildirim almak ve anket yapmak"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kurucu ekip, tekil değer önerisini birbirlerine sürekli hatırlatarak neyden kaçınmış olur?""",
+                        answers: [
+                          "Hızlı büyümeden",
+                          "Ürüne eklenebilecek farklı bir iş alanından/fonksiyondan (dağılma potansiyeli)----------------------",
+                          "Yatırımcı kaçırmaktan"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Hangisi haksız rekabet örneklerinden biri değildir?""",
+                        answers: [
+                          "Tutmuş bir işi yapmak",
+                          "Zengin bir aileden gelmek-----------------------",
+                          "Hali hazırda problemi yaşayan müşterilerinin olması"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Kanalları belirlerken öncelikli olarak dikkat etmemiz gereken konu nedir?""",
+                        answers: [
+                          "Hedef kitle ile uyumu------------------------",
+                          "Bütçemize uygun olması",
+                          "Ekibimiz ile uyumlu olması"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Fikir Doğrulama',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '45dk',
                   lessons: [
                     Lesson(
                         title: 'Fikir Doğrulama 1',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/xi0W5uN3-R4',
                         duration: '9dk'),
                     Lesson(
                         title: 'Fikir Doğrulama 2',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/x88__9rkMIU',
                         duration: '10dk'),
                     Lesson(
                         title: 'Fikir Doğrulama 3',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/Yo1Ze7Qqa5Y',
                         duration: '9dk'),
                     Lesson(
                         title: 'Fikir Doğrulama 4',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/RR9D_JdyRu0',
                         duration: '8dk'),
                     Lesson(
                         title: 'Fikir Doğrulama 5',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/6Gier_OlL5E',
                         duration: '9dk'),
                   ])
             ]),
-
-            HeaderTopics(
+        HeaderTopics(
             title: 'Girişimciler için Hukuk',
             description:
-            'Girişimcilik dünyasına girmeden önce bilmeniz gereken temel hukuki bilgileri öğrenin.',
+                'Girişimcilik dünyasına girmeden önce bilmeniz gereken temel hukuki bilgileri öğrenin.',
             duration: '104dk',
             color: Colors.blue,
             subtopics: [
-                LessonTopics(
+              LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Müzakereye ilişkin aşağıdakilerden hangisi yanlış bir bilgidir?""",
+                        answers: [
+                          "Müzakere ve pazarlık aynı kavramlara tekabül eder.--------------------------",
+                          "Müzakerenin en önemli aşaması hazırlık aşamasıdır.",
+                          "Duygu aşamasında bilginin ne kadar iyi kullanıldığı önemlidir."
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Girişimciler İçin Şirketleşme',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '25dk',
                   lessons: [
                     Lesson(
                         title: 'Girişimciler İçin Şirketleşme',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/gRec-V6WcZw',
                         duration: '25dk'),
                   ]),
-                LessonTopics(
+              LessonTopics(
+                  questions: [
+                    ModuleQuestions(
+                        question:
+                            """Aşağıdakilerden hangisi müzakerenin hazırlık aşamasında bilinmesi gereken önemli bilgilerden biri değildir?""",
+                        answers: [
+                          "Best Alternative to a Negotiated Agreement",
+                          "Reservation Value",
+                          "Binary Game--------------------------------"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Başarılı bir müzakerecinin aşağıdakilerden hangisini  yapmaması gerekir?""",
+                        answers: [
+                          "Hazırlık aşamasında kazanç-maliyet dengesi yapmak",
+                          "Hazırlık sırasında bilgileri analiz etmek",
+                          "İyi bir dinleyici olmak"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """Müzakerecinin hazırlık aşamasında bilmesi gerekenlere ilişkin aşağıdaki önermelerden hangisi/hangileri doğrudur?
+
+I. Rezerv satıcının kabul edeceği en düşük teklifi ifade eder.
+II. Alıcının ödemeyi kabul ettiği en yüksek değer rezervdir.
+III. Bir müzakerede iyimser senaryo ile rezerv arasında kalan alan  “ZOPA” (Zone of Possible Agreement ) dır.""",
+                        answers: [
+                          "I,II ve III-----------------------",
+                          "yalnız I",
+                          "yalnız II",
+                          "II ve II"
+                        ],
+                        trueIndex: 0),
+                    ModuleQuestions(
+                        question:
+                            """“BATNA” (Best Alternative to a Negotiated Agreement) kavramına ilişkin aşağıdakilerden  hangisi yanlıştır?""",
+                        answers: [
+                          "Bir müzakerenin olmazsa olmazıdır.",
+                          "Türkçeye tercümesi en iyi alternatiftir.",
+                          "Bir tedarikçinin ürünü incelerken benzer bir ürünü sunan herhangi bir başka tedarikçi BATNA’mızdır.",
+                          "BATNA en iyi ihtimalle elde edebileceğimiz çıktıların en fazlasını ifade eder.--------------------"
+                        ],
+                        trueIndex: 0),
+                  ],
                   title: 'Girişimciler İçin Müzakere 101',
-                  subtitle:
-                      "",
+                  subtitle: "",
                   duration: '36dk',
                   lessons: [
                     Lesson(
                         title: 'Girişimciler İçin Müzakere 101',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/j9y25qBTTtE',
                         duration: '36dk'),
                   ]),
               LessonTopics(
                   title: 'Girişimciler İçin KVKK ve GDPR',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '43dk',
                   lessons: [
                     Lesson(
                         title: 'Girişimciler İçin KVKK ve GDPR',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/XrJZkBRS2Ao',
                         duration: '43dk'),
                   ]),
             ]),
-
-            HeaderTopics(
+        HeaderTopics(
             title: 'Girişimciler için Finans',
             description:
-            'Girişimcilerin faaliyette bulundukları Finansal Sistem , Finansal Araçlar, Muhasebe ve Vergi Uygulamaları hakkında bilgi sahibi olun.',
+                'Girişimcilerin faaliyette bulundukları Finansal Sistem , Finansal Araçlar, Muhasebe ve Vergi Uygulamaları hakkında bilgi sahibi olun.',
             duration: '177dk',
             color: Colors.blue,
             subtopics: [
-                LessonTopics(
+              LessonTopics(
                   title: 'Girişimciler için Finansal Sistem',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '9dk',
                   lessons: [
                     Lesson(
                         title: 'Girişimciler için Finansal Sistem',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/jpSMIKfAnj8',
                         duration: 'dk'),
                   ]),
-                LessonTopics(
+              LessonTopics(
                   title: 'İşletmelerin Dikkat Etmesi Gereken Hususlar',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '9dk',
                   lessons: [
                     Lesson(
-                        title: 'İşletmelerin Kuruluş Süreci ve Dikkat Edilmesi Gereken Hususlar',
-                        subtitle:
-                            "",
+                        title:
+                            'İşletmelerin Kuruluş Süreci ve Dikkat Edilmesi Gereken Hususlar',
+                        subtitle: "",
                         url: 'https://youtu.be/fDSq-EJslPQ',
                         duration: '12dk'),
                     Lesson(
                         title: 'İşletmelerin Başarısızlık Nedenleri',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/ZOQi6hpQdvA',
                         duration: '8dk'),
-                  ]
-                  ),
-
-                LessonTopics(
+                  ]),
+              LessonTopics(
                   title: 'İşletmeler için Muhasebe',
-                  subtitle:
-                      "",
+                  subtitle: "",
                   duration: '17dk',
                   lessons: [
                     Lesson(
-                        title: 'İşletmeler için Muhasebe Nedir ve Mali Yönetim Açısından Neden Önemlidir',
-                        subtitle:
-                            "",
+                        title:
+                            'İşletmeler için Muhasebe Nedir ve Mali Yönetim Açısından Neden Önemlidir',
+                        subtitle: "",
                         url: 'https://youtu.be/trHXfywW9uU',
                         duration: '9dk'),
                     Lesson(
-                        title: 'Muhasebeciler ve İşletmeye Verdikleri Temel Hizmetler',
-                        subtitle:
-                            "",
+                        title:
+                            'Muhasebeciler ve İşletmeye Verdikleri Temel Hizmetler',
+                        subtitle: "",
                         url: 'https://youtu.be/qZn_bTL4m7o',
                         duration: '8dk'),
                   ])
-
             ]),
-
-            HeaderTopics(
+        HeaderTopics(
             title: 'Girişimciler için İK',
             description:
-            'İş hayatınızı yeniden inşa ederken ihtiyacınız olan becerileri kazanacak, başarılı bir profesyonel hayat için gerekli olan uzaktan çalışma, yaşam boyu öğrenme, bütünsel sağlık gibi konularda önemli ipuçlarına erişebileceksiniz.',
+                'İş hayatınızı yeniden inşa ederken ihtiyacınız olan becerileri kazanacak, başarılı bir profesyonel hayat için gerekli olan uzaktan çalışma, yaşam boyu öğrenme, bütünsel sağlık gibi konularda önemli ipuçlarına erişebileceksiniz.',
             duration: '77dk',
             color: Colors.blue,
             subtopics: [
-                LessonTopics(
+              LessonTopics(
                   title: 'İnsan Kaynakları Eğitimi',
-                  subtitle:
-                      '',
+                  subtitle: '',
                   duration: '77dk',
                   lessons: [
                     Lesson(
                         title: 'Özgeçmiş ve Motivasyon Mektubu Hazırlama',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/Mmp2mnWtpHU',
                         duration: '6dk'),
                     Lesson(
-                        title: 'Sosyal Platformlarda Oyun ve Uygulama Geliştirme Becerilerini Göster',
-                        subtitle:
-                            "",
+                        title:
+                            'Sosyal Platformlarda Oyun ve Uygulama Geliştirme Becerilerini Göster',
+                        subtitle: "",
                         url: 'https://youtu.be/dRJvjxFjLRs',
                         duration: '5dk'),
                     Lesson(
-                        title: 'Etkili Network Oluşturmak ve Sürdürmek için İpuçları',
-                        subtitle:
-                            "",
+                        title:
+                            'Etkili Network Oluşturmak ve Sürdürmek için İpuçları',
+                        subtitle: "",
                         url: 'https://youtu.be/UoIGQhChknA',
                         duration: '4dk'),
                     Lesson(
-                        title: 'Profesyonel Yetkinliklerinizi ve Şirketin Değerlerine & Kültürüne Uyumunuzu Doğru Yansıtmak',
-                        subtitle:
-                            "",
+                        title:
+                            'Profesyonel Yetkinliklerinizi ve Şirketin Değerlerine & Kültürüne Uyumunuzu Doğru Yansıtmak',
+                        subtitle: "",
                         url: 'https://youtu.be/1HS5yTC-N2U',
                         duration: '7dk'),
                     Lesson(
-                        title: 'Telefon Mülakatı, Yüz Yüze Mülakat ve Teknik Mülakat',
-                        subtitle:
-                            "",
+                        title:
+                            'Telefon Mülakatı, Yüz Yüze Mülakat ve Teknik Mülakat',
+                        subtitle: "",
                         url: 'https://youtu.be/-HNuj-BdNDc',
                         duration: '6dk'),
                     Lesson(
-                        title: 'Uygulama Geliştiricisi Kariyerine Başlarken Bazı İpuçları',
-                        subtitle:
-                            "",
+                        title:
+                            'Uygulama Geliştiricisi Kariyerine Başlarken Bazı İpuçları',
+                        subtitle: "",
                         url: 'https://youtu.be/B5VzxH8km_0',
                         duration: '10dk'),
                     Lesson(
-                        title: 'Uzaktan Çalışma Zorluklarının Üstesinden Nasıl Gelinir?',
-                        subtitle:
-                            "",
+                        title:
+                            'Uzaktan Çalışma Zorluklarının Üstesinden Nasıl Gelinir?',
+                        subtitle: "",
                         url: 'https://youtu.be/lrVaE1F8tHM',
                         duration: '6dk'),
                     Lesson(
-                        title: 'Uzaktan Çalışma Dünyasında Yaratıcılığı Artırmak',
-                        subtitle:
-                            "",
+                        title:
+                            'Uzaktan Çalışma Dünyasında Yaratıcılığı Artırmak',
+                        subtitle: "",
                         url: 'https://youtu.be/e35oaswK8ZQ',
                         duration: '7dk'),
                     Lesson(
-                        title: 'Uzaktan Çalışma Dünyasında Daha Anlamlı Bağlantılar Nasıl Kurulur ve Sürdürülür?',
-                        subtitle:
-                            "",
+                        title:
+                            'Uzaktan Çalışma Dünyasında Daha Anlamlı Bağlantılar Nasıl Kurulur ve Sürdürülür?',
+                        subtitle: "",
                         url: 'https://youtu.be/nFxqo9X834c',
                         duration: '6dk'),
                     Lesson(
-                        title: 'Freelance Oyun ve Uygulama Geliştiricisi Olmanın Avantajları, Zorlukları ve Dikkat Edilmesi Gereken Noktalar',
-                        subtitle:
-                            "",
+                        title:
+                            'Freelance Oyun ve Uygulama Geliştiricisi Olmanın Avantajları, Zorlukları ve Dikkat Edilmesi Gereken Noktalar',
+                        subtitle: "",
                         url: 'https://youtu.be/0z0FxenJryo',
                         duration: '4dk'),
                     Lesson(
                         title: 'Fiziksel Sağlık',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/CehWRdDscA8',
                         duration: '6dk'),
                     Lesson(
                         title: 'Zihin Sağlığı ve Bağlı & Değerli Hissetmek',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/_0mgQZJvSpA',
                         duration: '5dk'),
                     Lesson(
                         title: 'Yaşam Boyu Öğrenme ve Gelişim',
-                        subtitle:
-                            "",
+                        subtitle: "",
                         url: 'https://youtu.be/Wk0O3pKMMaQ',
                         duration: '5dk'),
-
                   ])
             ]),
       ];
 }
 
+class ModuleQuestions {
+  final String question;
+  final List<String> answers;
+  final int trueIndex;
+
+  ModuleQuestions(
+      {required this.question, required this.answers, required this.trueIndex});
+}

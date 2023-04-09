@@ -5,7 +5,7 @@ import 'package:app_jam_uygulama/pages/bottom_nav_pages/home_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/info_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/note_sharing_page.dart';
-import 'package:app_jam_uygulama/pages/bottom_nav_pages/oyun_pages/first_page.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/game_page.dart';
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +32,7 @@ class _FrameState extends State<Frame> {
     const LessonsPage(
       key: ValueKey<int>(2357457913),
     ),
-    const FirstPage(
+    const GamePage(
       key: ValueKey<int>(5793686),
     ),
   ];

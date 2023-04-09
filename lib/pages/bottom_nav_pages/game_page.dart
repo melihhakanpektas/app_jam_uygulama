@@ -1,16 +1,16 @@
 import 'package:app_jam_uygulama/components/game_background.dart';
 import 'package:flutter/material.dart';
 
-import 'second_page.dart';
+import 'oyun_pages/choose_one_page.dart';
 
-class FirstPage extends StatefulWidget {
-  const FirstPage({super.key});
+class GamePage extends StatefulWidget {
+  const GamePage({super.key});
 
   @override
-  State<FirstPage> createState() => _FirstPageState();
+  State<GamePage> createState() => _GamePageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -91,7 +91,7 @@ class _FirstPageState extends State<FirstPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const SecondPage()));
+                          builder: (context) => const ChooseOnePage()));
                       // context.read<AppInfoBloc>().setGamePageIndex(1);
                     },
                     style: ElevatedButton.styleFrom(
