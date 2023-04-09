@@ -23,68 +23,78 @@ class _GameFlutterState extends State<GameFlutter> {
                 SizedBox(
                     width: AppBar().preferredSize.width,
                     height: AppBar().preferredSize.height + 35),
-                Expanded(
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 3),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(15))),
-                          child: ListView(
-                            padding: const EdgeInsets.all(25),
-                            children: [
-                              ...List.generate(HeaderTopics.lessons.length,
-                                  (index1) {
-                                final topic = HeaderTopics.lessons[index1];
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(topic.title),
-                                    ...List.generate(topic.subtopics.length,
-                                        (index2) {
-                                      final subtopic = topic.subtopics[index2];
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 20.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Divider(
-                                              color: Colors.black,
-                                              thickness: 2,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(width: 3),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(15))),
+                              child: ListView(
+                                padding: const EdgeInsets.all(25),
+                                children: [
+                                  ...List.generate(HeaderTopics.lessons.length,
+                                      (index1) {
+                                    final topic = HeaderTopics.lessons[index1];
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(topic.title),
+                                        ...List.generate(topic.subtopics.length,
+                                            (index2) {
+                                          final subtopic =
+                                              topic.subtopics[index2];
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Divider(
+                                                  color: Colors.black,
+                                                  thickness: 2,
+                                                ),
+                                                OutlinedButton(
+                                                  onPressed: () {},
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Flexible(
+                                                          child: Text(
+                                                        subtopic.title,
+                                                      )),
+                                                      Checkbox(
+                                                          value: index1 == 0 &&
+                                                              index2 < 1,
+                                                          onChanged: null)
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            OutlinedButton(
-                                              onPressed: () {},
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(subtopic.title),
-                                                  Checkbox(
-                                                      value: index1 == 0 &&
-                                                          index2 < 1,
-                                                      onChanged: null)
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                                    const Divider(
-                                      thickness: 4,
-                                    )
-                                  ],
-                                );
-                              })
-                            ],
-                          )),
+                                          );
+                                        }),
+                                        const Divider(
+                                          thickness: 4,
+                                        )
+                                      ],
+                                    );
+                                  })
+                                ],
+                              )),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
