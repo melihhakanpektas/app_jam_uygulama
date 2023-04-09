@@ -13,6 +13,7 @@ class AppInfoBloc extends Cubit<AppInfo> {
             url: null,
             userName: 'User Name',
             pageIndex: 2,
+            gamePageIndex: 0,
             lessonIndex1: 0,
             lessonIndex2: 0,
             lessonIndex3: 0,
@@ -53,12 +54,17 @@ class AppInfoBloc extends Cubit<AppInfo> {
   setImageUrl(String url) {
     emit(state.copyWith(url: url));
   }
+
+  setGamePageIndex(int index) {
+    emit(state.copyWith(gamePageIndex: index));
+  }
 }
 
 class AppInfo {
   String? url;
   final String userName;
   final int pageIndex;
+  final int gamePageIndex;
   final int lessonIndex1;
   final int lessonIndex2;
   final int lessonIndex3;
@@ -67,6 +73,7 @@ class AppInfo {
     this.url,
     required this.userName,
     required this.pageIndex,
+    required this.gamePageIndex,
     required this.lessonIndex1,
     required this.lessonIndex2,
     required this.lessonIndex3,
@@ -76,6 +83,7 @@ class AppInfo {
     String? url,
     String? userName,
     int? pageIndex,
+    int? gamePageIndex,
     int? lessonIndex1,
     int? lessonIndex2,
     int? lessonIndex3,
@@ -84,6 +92,7 @@ class AppInfo {
       url: url ?? this.url,
       userName: userName ?? this.userName,
       pageIndex: pageIndex ?? this.pageIndex,
+      gamePageIndex: gamePageIndex ?? this.gamePageIndex,
       lessonIndex1: lessonIndex1 ?? this.lessonIndex1,
       lessonIndex2: lessonIndex2 ?? this.lessonIndex2,
       lessonIndex3: lessonIndex3 ?? this.lessonIndex3,
@@ -95,6 +104,7 @@ class AppInfo {
       'url': url,
       'userName': userName,
       'pageIndex': pageIndex,
+      'gamePageIndex': gamePageIndex,
       'lessonIndex1': lessonIndex1,
       'lessonIndex2': lessonIndex2,
       'lessonIndex3': lessonIndex3,
@@ -103,9 +113,10 @@ class AppInfo {
 
   factory AppInfo.fromMap(Map<String, dynamic> map) {
     return AppInfo(
-      url: map['url'] as String,
+      url: map['url'] != null ? map['url'] as String : null,
       userName: map['userName'] as String,
       pageIndex: map['pageIndex'] as int,
+      gamePageIndex: map['gamePageIndex'] as int,
       lessonIndex1: map['lessonIndex1'] as int,
       lessonIndex2: map['lessonIndex2'] as int,
       lessonIndex3: map['lessonIndex3'] as int,
@@ -119,7 +130,7 @@ class AppInfo {
 
   @override
   String toString() {
-    return 'AppInfo(url: $url, userName: $userName, pageIndex: $pageIndex, lessonIndex1: $lessonIndex1, lessonIndex2: $lessonIndex2, lessonIndex3: $lessonIndex3)';
+    return 'AppInfo(url: $url, userName: $userName, pageIndex: $pageIndex, gamePageIndex: $gamePageIndex, lessonIndex1: $lessonIndex1, lessonIndex2: $lessonIndex2, lessonIndex3: $lessonIndex3)';
   }
 
   @override
@@ -129,6 +140,7 @@ class AppInfo {
     return other.url == url &&
         other.userName == userName &&
         other.pageIndex == pageIndex &&
+        other.gamePageIndex == gamePageIndex &&
         other.lessonIndex1 == lessonIndex1 &&
         other.lessonIndex2 == lessonIndex2 &&
         other.lessonIndex3 == lessonIndex3;
@@ -139,6 +151,7 @@ class AppInfo {
     return url.hashCode ^
         userName.hashCode ^
         pageIndex.hashCode ^
+        gamePageIndex.hashCode ^
         lessonIndex1.hashCode ^
         lessonIndex2.hashCode ^
         lessonIndex3.hashCode;
