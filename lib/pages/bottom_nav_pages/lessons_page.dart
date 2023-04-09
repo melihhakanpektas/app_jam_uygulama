@@ -54,7 +54,9 @@ class _LessonsPageState extends State<LessonsPage> {
             initiallyExpanded: lessonIndex1 == index1,
             textColor: Colors.blue,
             childrenPadding: const EdgeInsets.only(left: 20),
-            leading: Text(header.duration),
+            leading: SizedBox(
+              width: 55,
+              child: Text(header.duration)),
             title: Text(header.title),
             subtitle: Text(
               header.description,

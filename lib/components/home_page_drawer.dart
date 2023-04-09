@@ -1,13 +1,15 @@
-import 'package:app_jam_uygulama/pages/profile.dart';
+import 'package:app_jam_uygulama/pages/drawer_pages/about.dart';
+import 'package:app_jam_uygulama/pages/drawer_pages/profile.dart';
+import 'package:app_jam_uygulama/pages/drawer_pages/settings_pageState.dart';
+
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/note_sharing/note_sharing_page.dart';
-import 'package:app_jam_uygulama/pages/About.dart';
+
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/game_page.dart';
-import 'package:app_jam_uygulama/pages/SettingsPageState.dart';
 
 class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({super.key});
