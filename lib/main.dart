@@ -1,5 +1,5 @@
-import 'package:app_jam_uygulama/firebase_options.dart';
 import 'package:app_jam_uygulama/pages/wrapper.dart';
+import 'package:app_jam_uygulama/services/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

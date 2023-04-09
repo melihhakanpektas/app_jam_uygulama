@@ -17,7 +17,7 @@ class _LessonsPageState extends State<LessonsPage> {
   int lessonIndex2 = 0;
   int lessonIndex3 = 0;
   String? videoId = YoutubePlayer.convertUrlToId(
-      'https://www.youtube.com/watch?v=dQw4w9WgXcQ'); // ACABA BU NEYMIS?
+      'https://youtu.be/ibTL_SfrtVM'); // ACABA BU NEYMIS?
 
   @override
   void initState() {
@@ -97,15 +97,22 @@ class _LessonsPageState extends State<LessonsPage> {
                         lessonIndex2 = index2;
                         lessonIndex3 = index3;
                         context.read<AppInfoBloc>()
-                          ..setIndex(1, index1)
-                          ..setIndex(2, index2)
-                          ..setIndex(3, index3);
+                          ..setLessonIndex(1, index1)
+                          ..setLessonIndex(2, index2)
+                          ..setLessonIndex(3, index3);
 
                         videoId = YoutubePlayer.convertUrlToId(HeaderTopics
-                            .lessons[lessonIndex1]
-                            .subtopics[lessonIndex2]
-                            .lessons[lessonIndex3]
-                            .url);
+                                .lessons[lessonIndex1]
+                                .subtopics[lessonIndex2]
+                                .lessons[lessonIndex3]
+                                .url
+                                .isNotEmpty
+                            ? HeaderTopics
+                                .lessons[lessonIndex1]
+                                .subtopics[lessonIndex2]
+                                .lessons[lessonIndex3]
+                                .url
+                            : 'https://youtu.be/ibTL_SfrtVM');
                       }),
                     );
                   }),

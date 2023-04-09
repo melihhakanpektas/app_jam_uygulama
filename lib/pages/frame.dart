@@ -6,7 +6,9 @@ import 'package:app_jam_uygulama/pages/bottom_nav_pages/home_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/info_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/note_sharing_page.dart';
+import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class Frame extends StatefulWidget {
@@ -17,8 +19,6 @@ class Frame extends StatefulWidget {
 }
 
 class _FrameState extends State<Frame> {
-  int currentIndex = 2;
-
   final pages = <Widget>[
     const InfoPage(
       key: ValueKey<int>(867127),
@@ -39,7 +39,7 @@ class _FrameState extends State<Frame> {
 
   void onItemTapped(int index) {
     setState(() {
-      currentIndex = index;
+      context.read<AppInfoBloc>().setPageIndex(index);
     });
   }
 
@@ -47,7 +47,7 @@ class _FrameState extends State<Frame> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (currentIndex == 2) {
+        if (context.read<AppInfoBloc>().state.pageIndex == 2) {
           return true;
         } else {
           onItemTapped(2);
@@ -55,6 +55,7 @@ class _FrameState extends State<Frame> {
         }
       },
       child: Scaffold(
+        drawerScrimColor: Colors.black.withOpacity(0.2),
         extendBodyBehindAppBar: true,
         drawer: const HomePageDrawer(),
         appBar: AppBar(
@@ -78,86 +79,88 @@ class _FrameState extends State<Frame> {
             ),
           ),
         ),
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: AnimatedSwitcher(
-                    key: const ValueKey<int>(5477862),
-                    duration: const Duration(milliseconds: 500),
-                    child: pages[currentIndex],
+        body: BlocBuilder<AppInfoBloc, AppInfo>(builder: (context, state) {
+          return Stack(
+            children: [
+              Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: AnimatedSwitcher(
+                      key: const ValueKey<int>(5477862),
+                      duration: const Duration(milliseconds: 500),
+                      child: pages[state.pageIndex],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              child: SizedBox(
-                height: 90,
-                width: MediaQuery.of(context).size.width,
-                child: ClipRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: BottomNavigationBar(
-                        selectedItemColor: Colors.white,
-                        backgroundColor: Colors.black38,
-                        elevation: 0,
-                        type: BottomNavigationBarType.fixed,
-                        currentIndex: currentIndex,
-                        onTap: (index) {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                        items: [
-                          const BottomNavigationBarItem(
-                              icon: Icon(Icons.info), label: 'Hakkında'),
-                          BottomNavigationBarItem(
-                              icon: Stack(
-                                children: const [
-                                  Positioned(
-                                    right: 0,
-                                    bottom: 0,
-                                    child: Icon(
-                                      Icons.share,
-                                      size: 15,
-                                    ),
-                                  ),
-                                  Icon(MdiIcons.table)
-                                ],
-                              ),
-                              label: 'Not Paylaş'),
-                          BottomNavigationBarItem(
-                              icon: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: Stack(
+                ],
+              ),
+              Positioned(
+                bottom: 0,
+                child: SizedBox(
+                  height: 90,
+                  width: MediaQuery.of(context).size.width,
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: BottomNavigationBar(
+                          selectedItemColor: Colors.white,
+                          backgroundColor: Colors.black38,
+                          elevation: 0,
+                          type: BottomNavigationBarType.fixed,
+                          currentIndex: state.pageIndex,
+                          onTap: (index) {
+                            setState(() {
+                              onItemTapped(index);
+                            });
+                          },
+                          items: [
+                            const BottomNavigationBarItem(
+                                icon: Icon(Icons.info), label: 'Akademi'),
+                            BottomNavigationBarItem(
+                                icon: Stack(
                                   children: const [
-                                    Center(
-                                      child: Image(
-                                        width: 40,
-                                        fit: BoxFit.contain,
-                                        image: AssetImage(
-                                            'assets/images/oua_logo.png'),
+                                    Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: Icon(
+                                        Icons.share,
+                                        size: 15,
                                       ),
                                     ),
+                                    Icon(MdiIcons.table)
                                   ],
                                 ),
-                              ),
-                              label: 'Ana Sayfa'),
-                          const BottomNavigationBarItem(
-                              icon: Icon(Icons.book), label: 'Dersler'),
-                          const BottomNavigationBarItem(
-                              icon: Icon(Icons.games), label: 'Oyun'),
-                        ]),
+                                label: 'Not Paylaş'),
+                            BottomNavigationBarItem(
+                                icon: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: Stack(
+                                    children: const [
+                                      Center(
+                                        child: Image(
+                                          width: 40,
+                                          fit: BoxFit.contain,
+                                          image: AssetImage(
+                                              'assets/images/oua_logo.png'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                label: 'Ana Sayfa'),
+                            const BottomNavigationBarItem(
+                                icon: Icon(Icons.book), label: 'Dersler'),
+                            const BottomNavigationBarItem(
+                                icon: Icon(Icons.games), label: 'Oyun'),
+                          ]),
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
+              )
+            ],
+          );
+        }),
       ),
     );
   }

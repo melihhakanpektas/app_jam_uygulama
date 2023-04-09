@@ -10,7 +10,9 @@ class AppInfoBloc extends Cubit<AppInfo> {
   AppInfoBloc()
       : super(
           AppInfo(
+            url: null,
             userName: 'User Name',
+            pageIndex: 0,
             lessonIndex1: 0,
             lessonIndex2: 0,
             lessonIndex3: 0,
@@ -29,7 +31,7 @@ class AppInfoBloc extends Cubit<AppInfo> {
     final lessonIndex1 = sp.getInt('lessonIndex1');
     final lessonIndex2 = sp.getInt('lessonIndex2');
     final lessonIndex3 = sp.getInt('lessonIndex3');
-    emit(AppInfo(
+    emit(state.copyWith(
       userName: name,
       lessonIndex1: lessonIndex1 ?? 0,
       lessonIndex2: lessonIndex2 ?? 0,
@@ -38,32 +40,50 @@ class AppInfoBloc extends Cubit<AppInfo> {
     return state;
   }
 
-  Future setIndex(int indexNo, int index) async {
+  Future setLessonIndex(int indexNo, int index) async {
     final sp = await SharedPreferences.getInstance();
     await sp.setInt('lessonIndex$indexNo', index);
     refresh();
   }
+
+  setPageIndex(int index) {
+    emit(state.copyWith(pageIndex: index));
+  }
+
+  setImageUrl(String url) {
+    emit(state.copyWith(url: url));
+  }
 }
 
 class AppInfo {
+  String? url;
   final String userName;
+  final int pageIndex;
   final int lessonIndex1;
   final int lessonIndex2;
   final int lessonIndex3;
-  AppInfo(
-      {required this.userName,
-      required this.lessonIndex1,
-      required this.lessonIndex2,
-      required this.lessonIndex3});
+
+  AppInfo({
+    this.url,
+    required this.userName,
+    required this.pageIndex,
+    required this.lessonIndex1,
+    required this.lessonIndex2,
+    required this.lessonIndex3,
+  });
 
   AppInfo copyWith({
+    String? url,
     String? userName,
+    int? pageIndex,
     int? lessonIndex1,
     int? lessonIndex2,
     int? lessonIndex3,
   }) {
     return AppInfo(
+      url: url ?? this.url,
       userName: userName ?? this.userName,
+      pageIndex: pageIndex ?? this.pageIndex,
       lessonIndex1: lessonIndex1 ?? this.lessonIndex1,
       lessonIndex2: lessonIndex2 ?? this.lessonIndex2,
       lessonIndex3: lessonIndex3 ?? this.lessonIndex3,
@@ -72,7 +92,9 @@ class AppInfo {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'url': url,
       'userName': userName,
+      'pageIndex': pageIndex,
       'lessonIndex1': lessonIndex1,
       'lessonIndex2': lessonIndex2,
       'lessonIndex3': lessonIndex3,
@@ -81,7 +103,9 @@ class AppInfo {
 
   factory AppInfo.fromMap(Map<String, dynamic> map) {
     return AppInfo(
+      url: map['url'] as String,
       userName: map['userName'] as String,
+      pageIndex: map['pageIndex'] as int,
       lessonIndex1: map['lessonIndex1'] as int,
       lessonIndex2: map['lessonIndex2'] as int,
       lessonIndex3: map['lessonIndex3'] as int,
@@ -95,14 +119,16 @@ class AppInfo {
 
   @override
   String toString() {
-    return 'AppInfo(userName: $userName, lessonIndex1: $lessonIndex1, lessonIndex2: $lessonIndex2, lessonIndex3: $lessonIndex3)';
+    return 'AppInfo(url: $url, userName: $userName, pageIndex: $pageIndex, lessonIndex1: $lessonIndex1, lessonIndex2: $lessonIndex2, lessonIndex3: $lessonIndex3)';
   }
 
   @override
   bool operator ==(covariant AppInfo other) {
     if (identical(this, other)) return true;
 
-    return other.userName == userName &&
+    return other.url == url &&
+        other.userName == userName &&
+        other.pageIndex == pageIndex &&
         other.lessonIndex1 == lessonIndex1 &&
         other.lessonIndex2 == lessonIndex2 &&
         other.lessonIndex3 == lessonIndex3;
@@ -110,7 +136,9 @@ class AppInfo {
 
   @override
   int get hashCode {
-    return userName.hashCode ^
+    return url.hashCode ^
+        userName.hashCode ^
+        pageIndex.hashCode ^
         lessonIndex1.hashCode ^
         lessonIndex2.hashCode ^
         lessonIndex3.hashCode;

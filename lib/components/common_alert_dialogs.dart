@@ -1,10 +1,156 @@
+import 'dart:io';
+
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CommonAlertDialogs {
+  static settings(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        bool notificationsEnabled = true;
+        bool darkModeEnabled = false;
+        return AlertDialog(
+          title: const Text('Ayarlar'),
+          content: StatefulBuilder(builder: (context, setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 10),
+                ListTile(
+                  leading: const Icon(Icons.notifications),
+                  title: const Text('Bildirimleri Aç'),
+                  trailing: Switch(
+                    value: notificationsEnabled,
+                    onChanged: (value) {
+                      setState(() {
+                        notificationsEnabled = value;
+                      });
+                    },
+                  ),
+                ),
+                const Divider(),
+                ListTile(
+                  leading: const Icon(Icons.dark_mode),
+                  title: const Text('Karanlık Modu Aç'),
+                  trailing: Switch(
+                    value: darkModeEnabled,
+                    onChanged: (value) {
+                      setState(() {
+                        darkModeEnabled = value;
+                      });
+                    },
+                  ),
+                ),
+                const Divider(),
+                ListTile(
+                  leading: const Icon(Icons.language),
+                  title: const Text('Dil Seçimi'),
+                  trailing: DropdownButton<String>(
+                    value: 'TR',
+                    items: <String>['TR', 'EN']
+                        .map((String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            ))
+                        .toList(),
+                    onChanged: (_) {},
+                  ),
+                ),
+                const Divider(),
+                ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Çıkış Yap'),
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                    // Çıkış yapma işlemleri burada yapılabilir
+                  },
+                ),
+              ],
+            );
+          }),
+        );
+      });
+  static profile(BuildContext context) => showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final user = FirebaseAuth.instance.currentUser!;
+        final userName = context.read<AppInfoBloc>().state.userName;
+        return AlertDialog(
+          title: const Text('Profil'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 16),
+              BlocBuilder<AppInfoBloc, AppInfo>(builder: (context, state) {
+                return CircleAvatar(
+                  radius: 75,
+                  backgroundImage:
+                      const AssetImage('assets/images/blankperson.jpg'),
+                  foregroundImage:
+                      state.url != null ? NetworkImage(state.url!) : null,
+                );
+              }),
+              const SizedBox(height: 16),
+              Text(
+                userName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 24),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                user.email!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final pickedFile = await ImagePicker()
+                        .pickImage(source: ImageSource.camera);
+                    if (pickedFile == null) return;
+                    final storageRef =
+                        FirebaseStorage.instance.ref().child(user.uid);
+                    final uploadTask =
+                        storageRef.putFile(File(pickedFile.path));
+                    await uploadTask.whenComplete(() async {
+                      print('Resim yüklendi.');
+                      context.read<AppInfoBloc>().setImageUrl(
+                          await FirebaseStorage.instance
+                              .ref()
+                              .child(user.uid)
+                              .getDownloadURL());
+                    });
+                  },
+                  child: const Text('Profil Resmini Değiştir'),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Hesap Ayarları'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.security),
+                title: const Text('Gizlilik ve Güvenlik'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.feedback),
+                title: const Text('Geribildirim Gönder'),
+                onTap: () {},
+              ),
+            ],
+          ),
+        );
+      });
   static shareNewNote(BuildContext context) => showDialog(
       context: context,
       builder: (BuildContext context) {

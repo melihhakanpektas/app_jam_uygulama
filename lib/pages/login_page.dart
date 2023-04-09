@@ -2,6 +2,7 @@ import 'package:app_jam_uygulama/components/common_alert_dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +23,16 @@ class _LoginPageState extends State<LoginPage> {
 
     //TODO BlocProvider.of<EventsBloc>(context).clear();
     super.initState();
+    @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft,
+      ]);
+    }
   }
 
   @override
