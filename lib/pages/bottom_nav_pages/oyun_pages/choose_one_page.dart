@@ -2,7 +2,10 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:app_jam_uygulama/components/game_background.dart';
+import 'package:app_jam_uygulama/models/lesson.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/oyun_pages/game_flutter.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/oyun_pages/game_unity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChooseOnePage extends StatefulWidget {
@@ -16,13 +19,10 @@ class ChooseOnePageState extends State<ChooseOnePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> animation;
-  List<int> randomNumbers = [];
+  List<int> randomNumbers = [for (var i = 0; i < 11; i++) Random().nextInt(4)];
 
   @override
   void initState() {
-    for (var i = 0; i < 11; i++) {
-      randomNumbers.add(Random().nextInt(4));
-    }
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 10));
@@ -140,33 +140,107 @@ class ChooseOnePageState extends State<ChooseOnePage>
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
                       decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .background
+                              .withOpacity(0.5),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(15))),
                       width: MediaQuery.of(context).size.width * 0.95,
                       height: MediaQuery.of(context).size.height * 0.3,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            //TODO: skor listesi
-                            ...List.generate(
-                                puanlar.length,
-                                (index) => ListTile(
-                                      leading: Text((index + 1).toString()),
-                                      title: Text(
-                                          isimListesi[randomNumbers[index]]),
-                                      trailing: Text('Puan: ${puanlar[index]}'),
-                                    ))
-                          ],
-                        ),
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('scorboard')
+                            .snapshots(),
+                        builder: ((context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (snapshot.data!.docs.isNotEmpty) {
+                            var dataMap = <String, ScoreBoard>{};
+                            for (var doc in snapshot.data!.docs) {
+                              var data = doc.data() as Map<String, dynamic>;
+                              var uid = data['uid'] as String;
+                              var name = data['name'] as String;
+                              var point = data['point'] as int;
+                              var index1 = data['index1'] as int;
+                              var index2 = data['index2'] as int;
+
+                              var key = '${index1}_$index2';
+                              if (dataMap.containsKey(key)) {
+                                var scoreboard = dataMap[key]!;
+                                if (point > scoreboard.point) {
+                                  dataMap[key] = scoreboard.copyWith(
+                                      name: name, point: point, uid: uid);
+                                }
+                              } else {
+                                dataMap[key] = ScoreBoard(
+                                    uid: uid,
+                                    name: name,
+                                    point: point,
+                                    index1: index1,
+                                    index2: index2);
+                              }
+                            }
+
+                            var data = dataMap.values.toList();
+                            var uidList = data.map((e) => e.uid).toSet();
+                            var lastData = [];
+
+                            for (var a in uidList) {
+                              int foldedPoint = dataMap.values
+                                  .where((element) => element.uid == a)
+                                  .map((e) => e.point)
+                                  .fold(
+                                      0,
+                                      (previousValue, element) =>
+                                          previousValue + element);
+                              lastData.add(ScoreBoard(
+                                  uid: a,
+                                  name: dataMap.values
+                                      .firstWhere((element) => element.uid == a)
+                                      .name,
+                                  point: foldedPoint,
+                                  index1: 1,
+                                  index2: 1));
+                            }
+
+                            return Column(
+                              children: [
+                                // Skor listesi
+                                ...List.generate(
+                                  lastData.length,
+                                  (index) => ListTile(
+                                    leading: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text((index + 1).toString()),
+                                      ],
+                                    ),
+                                    title: Text(lastData[index].name),
+                                    trailing:
+                                        Text('Puan: ${lastData[index].point}'),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Veri Bulunamadi'),
+                            );
+                          }
+                        }),
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -199,7 +273,12 @@ class ChooseOnePageState extends State<ChooseOnePage>
                                   child: Material(
                                     color: Colors.transparent,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const GameUnity()));
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 15),

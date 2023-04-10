@@ -1,4 +1,5 @@
 import 'package:app_jam_uygulama/pages/wrapper.dart';
+import 'package:app_jam_uygulama/providers/lessons_bloc.dart';
 import 'package:app_jam_uygulama/services/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => LessonsBloc()),
         BlocProvider(
           create: (context) => AppInfoBloc(),
         )

@@ -1,5 +1,5 @@
-import 'package:app_jam_uygulama/models/lesson.dart';
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
+import 'package:app_jam_uygulama/providers/lessons_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -16,8 +16,8 @@ class _LessonsPageState extends State<LessonsPage> {
   int lessonIndex1 = 0;
   int lessonIndex2 = 0;
   int lessonIndex3 = 0;
-  String? videoId = YoutubePlayer.convertUrlToId(
-      'https://youtu.be/ibTL_SfrtVM'); // ACABA BU NEYMIS?
+  String? videoId =
+      YoutubePlayer.convertUrlToId('https://youtu.be/ibTL_SfrtVM');
 
   @override
   void initState() {
@@ -26,9 +26,12 @@ class _LessonsPageState extends State<LessonsPage> {
     lessonIndex1 = appInfo.lessonIndex1;
     lessonIndex2 = appInfo.lessonIndex2;
     lessonIndex3 = appInfo.lessonIndex3;
-    videoId = YoutubePlayer.convertUrlToId(HeaderTopics.lessons[lessonIndex1]
-        .subtopics[lessonIndex2].lessons[lessonIndex3].url);
-    debugPrint('videoId: ${videoId}');
+    videoId = YoutubePlayer.convertUrlToId(context
+        .read<LessonsBloc>()
+        .state[lessonIndex1]
+        .subtopics[lessonIndex2]
+        .lessons[lessonIndex3]
+        .url);
   }
 
   @override
@@ -36,17 +39,19 @@ class _LessonsPageState extends State<LessonsPage> {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Html(
-          key: const ValueKey<int>(153324572342),
-          data: """
-          <iframe width="${MediaQuery.of(context).size.width}" height="${MediaQuery.of(context).size.width * 0.54}" src="https://www.youtube.com/embed/$videoId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          """,
+        title: Center(
+          child: Html(
+            key: const ValueKey<int>(153324572342),
+            data: """
+            <iframe width="${MediaQuery.of(context).size.width}" height="${MediaQuery.of(context).size.width * 0.54}" src="https://www.youtube.com/embed/$videoId" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            """,
+          ),
         ),
         toolbarHeight: MediaQuery.of(context).size.width * 0.54,
       ),
       body: ListView(children: [
-        ...List.generate(HeaderTopics.lessons.length, (index1) {
-          final header = HeaderTopics.lessons[index1];
+        ...List.generate(context.read<LessonsBloc>().state.length, (index1) {
+          final header = context.read<LessonsBloc>().state[index1];
           return ExpansionTile(
             initiallyExpanded: lessonIndex1 == index1,
             textColor: Colors.blue,
@@ -60,10 +65,11 @@ class _LessonsPageState extends State<LessonsPage> {
               overflow: TextOverflow.ellipsis,
             ),
             children: [
-              ...List.generate(HeaderTopics.lessons[index1].subtopics.length,
+              ...List.generate(
+                  context.read<LessonsBloc>().state[index1].subtopics.length,
                   (index2) {
                 final lessonTopic =
-                    HeaderTopics.lessons[index1].subtopics[index2];
+                    context.read<LessonsBloc>().state[index1].subtopics[index2];
                 return ExpansionTile(
                   initiallyExpanded: lessonIndex2 == index2,
                   textColor: Colors.orange,
@@ -101,14 +107,16 @@ class _LessonsPageState extends State<LessonsPage> {
                           ..setLessonIndex(2, index2)
                           ..setLessonIndex(3, index3);
 
-                        videoId = YoutubePlayer.convertUrlToId(HeaderTopics
-                                .lessons[lessonIndex1]
+                        videoId = YoutubePlayer.convertUrlToId(context
+                                .read<LessonsBloc>()
+                                .state[lessonIndex1]
                                 .subtopics[lessonIndex2]
                                 .lessons[lessonIndex3]
                                 .url
                                 .isNotEmpty
-                            ? HeaderTopics
-                                .lessons[lessonIndex1]
+                            ? context
+                                .read<LessonsBloc>()
+                                .state[lessonIndex1]
                                 .subtopics[lessonIndex2]
                                 .lessons[lessonIndex3]
                                 .url
@@ -141,7 +149,7 @@ class LessonDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
-          title: Text(HeaderTopics.lessons[lessonIndex].title),
+          title: Text(context.read<LessonsBloc>().state[lessonIndex].title),
           subtitle: const Text(''),
         ),
       ),

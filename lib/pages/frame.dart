@@ -1,12 +1,15 @@
 import 'dart:ui';
 
 import 'package:app_jam_uygulama/components/home_page_drawer.dart';
+import 'package:app_jam_uygulama/pages/bottom_nav_pages/game_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/home_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/info_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/lessons_page.dart';
 import 'package:app_jam_uygulama/pages/bottom_nav_pages/note_sharing_page.dart';
-import 'package:app_jam_uygulama/pages/bottom_nav_pages/game_page.dart';
 import 'package:app_jam_uygulama/providers/app_info_bloc.dart';
+import 'package:app_jam_uygulama/providers/lessons_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -41,6 +44,18 @@ class _FrameState extends State<Frame> {
     setState(() {
       context.read<AppInfoBloc>().setPageIndex(index);
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<LessonsBloc>().refresh();
+    FirebaseStorage.instance
+        .ref()
+        .child(FirebaseAuth.instance.currentUser!.uid)
+        .getDownloadURL()
+        .then((value) => context.read<AppInfoBloc>().setImageUrl(value));
   }
 
   @override
