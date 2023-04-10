@@ -11,6 +11,7 @@ import 'package:app_jam_uygulama/providers/lessons_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -60,6 +61,7 @@ class _FrameState extends State<Frame> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown]);
     return WillPopScope(
       onWillPop: () async {
         if (context.read<AppInfoBloc>().state.pageIndex == 2) {
