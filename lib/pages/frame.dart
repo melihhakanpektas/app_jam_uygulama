@@ -61,7 +61,7 @@ class _FrameState extends State<Frame> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return WillPopScope(
       onWillPop: () async {
         if (context.read<AppInfoBloc>().state.pageIndex == 2) {
